@@ -1,17 +1,17 @@
 // unified palette
 // try to use these colors when possible
-$bg-color: #15191E;
+$bg-color: #212121;
 $base-color: $bg-color;
 $base-text-color: #ffffff;
 $header-panel-bg-color: #20252B;
 $header-panel-border-color: #000000;
-$header-panel-text-primary-color: #B9BEC6;
-$header-panel-text-secondary-color: #c8c8cd;
+$header-panel-text-primary-color: #ffffff;
+$header-panel-text-secondary-color: #b3b3b3;
 $text-primary-color: #ffffff;
-$text-secondary-color: #B9BEC6;
-$search-bg-color: #181b21;
-$search-placeholder-color: #61708b;
-$room-highlight-color: #343a46;
+$text-secondary-color: #b3b3b3;
+$search-bg-color: #303030;
+$search-placeholder-color: #616161;
+$room-highlight-color: #424242;
 
 // typical text (dark-on-white in light skin)
 $primary-fg-color: $text-primary-color;
@@ -19,8 +19,8 @@ $primary-bg-color: $bg-color;
 $muted-fg-color: $header-panel-text-primary-color;
 
 // additional text colors
-$secondary-fg-color: #A9B2BC;
-$tertiary-fg-color: #8E99A4;
+$secondary-fg-color: #b3b3b3;
+$tertiary-fg-color: #808080;
 
 // used for dialog box text
 $light-fg-color: $header-panel-text-secondary-color;
@@ -39,7 +39,7 @@ $info-plinth-fg-color: #888;
 
 $preview-bar-bg-color: $header-panel-bg-color;
 
-$tagpanel-bg-color: rgba(38, 39, 43, 0.82);
+$tagpanel-bg-color: rgba(48, 48, 48, 0.82);
 $inverted-bg-color: $base-color;
 
 // used by AddressSelector
