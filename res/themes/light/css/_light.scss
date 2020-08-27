@@ -14,7 +14,7 @@ $monospace-font-family: Inconsolata, Twemoji, 'Apple Color Emoji', 'Segoe UI Emo
 
 // unified palette
 // try to use these colors when possible
-$accent-color: #0DBD8B;
+$accent-color: #8BC34A;
 $accent-bg-color: rgba(3, 179, 129, 0.16);
 $notice-primary-color: #ff4b55;
 $notice-primary-bg-color: rgba(255, 75, 85, 0.16);
@@ -25,7 +25,7 @@ $header-panel-bg-color: #f3f8fd;
 
 // typical text (dark-on-white in light skin)
 $primary-bg-color: #ffffff;
-$muted-fg-color: #61708b; // Commonly used in headings and relevant alt text
+$muted-fg-color: #616161; // Commonly used in headings and relevant alt text
 
 // used for dialog box text
 $light-fg-color: #747474;
@@ -142,7 +142,7 @@ $settings-profile-overlay-bg-color: #000;
 $settings-profile-overlay-placeholder-bg-color: transparent;
 $settings-profile-overlay-fg-color: #fff;
 $settings-profile-overlay-placeholder-fg-color: #2e2f32;
-$settings-subsection-fg-color: #61708b;
+$settings-subsection-fg-color: #616161;
 
 $voip-decline-color: #f48080;
 $voip-accept-color: #80f480;
@@ -177,7 +177,7 @@ $roomlist-header-color: $tertiary-fg-color;
 $roomsublist-divider-color: $primary-fg-color;
 
 $roomtile-preview-color: $secondary-fg-color;
-$roomtile-default-badge-bg-color: #61708b;
+$roomtile-default-badge-bg-color: #616161;
 $roomtile-selected-bg-color: #FFF;
 
 $presence-online: $accent-color;
@@ -186,14 +186,14 @@ $presence-offline: #E3E8F0;
 
 // ********************
 
-$username-variant1-color: #368bd6;
-$username-variant2-color: #ac3ba8;
-$username-variant3-color: #0DBD8B;
-$username-variant4-color: #e64f7a;
-$username-variant5-color: #ff812d;
-$username-variant6-color: #2dc2c5;
-$username-variant7-color: #5c56f5;
-$username-variant8-color: #74d12c;
+$username-variant1-color: #8BC34A;
+$username-variant2-color: #8BC34A;
+$username-variant3-color: #8BC34A;
+$username-variant4-color: #8BC34A;
+$username-variant5-color: #8BC34A;
+$username-variant6-color: #8BC34A;
+$username-variant7-color: #8BC34A;
+$username-variant8-color: #8BC34A;
 
 $notice-secondary-color: $roomlist-header-color;
 
@@ -284,7 +284,7 @@ $authpage-body-bg-color: #ffffff;
 $authpage-focus-bg-color: #dddddd;
 $authpage-lang-color: #4e5054;
 $authpage-primary-color: #232f32;
-$authpage-secondary-color: #61708b;
+$authpage-secondary-color: #616161;
 
 $dark-panel-bg-color: $secondary-accent-color;
 $panel-gradient: rgba(242, 245, 248, 0), rgba(242, 245, 248, 1);
