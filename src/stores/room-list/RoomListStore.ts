@@ -434,9 +434,10 @@ export class RoomListStoreClass extends AsyncStoreWithClient<IState> {
 
     // logic must match calculateListOrder
     private calculateTagSorting(tagId: TagID): SortAlgorithm {
+        // TODO SC here
         const isDefaultRecent = tagId === DefaultTagID.Invite || tagId === DefaultTagID.DM;
-        const defaultSort = isDefaultRecent ? SortAlgorithm.Recent : SortAlgorithm.Alphabetic;
-        const settingAlphabetical = SettingsStore.getValue("RoomList.orderAlphabetically", null, true);
+        const defaultSort = SortAlgorithm.Recent;//isDefaultRecent ? SortAlgorithm.Recent : SortAlgorithm.Alphabetic;
+        const settingAlphabetical = SettingsStore.getValue("RoomList.orderAlphabetically", null, false);
         const definedSort = this.getTagSorting(tagId);
         const storedSort = this.getStoredTagSorting(tagId);
 
@@ -622,8 +623,18 @@ export class RoomListStoreClass extends AsyncStoreWithClient<IState> {
      * @returns The tags for the room.
      */
     public getTagsForRoom(room: Room): TagID[] {
-        const algorithmTags = this.algorithm.getTagsForRoom(room);
-        if (!algorithmTags) return [DefaultTagID.Untagged];
+        var algorithmTags = this.algorithm.getTagsForRoom(room);
+
+        if (!algorithmTags) return [DefaultTagID.Unified];
+
+        const dmTagIndex = algorithmTags.indexOf(DefaultTagID.DM);
+        if (dmTagIndex !== -1) {
+            algorithmTags[dmTagIndex] = DefaultTagID.Unified;
+        }
+        const untaggedTagIndex = algorithmTags.indexOf(DefaultTagID.Untagged);
+        if (untaggedTagIndex !== -1) {
+            algorithmTags[untaggedTagIndex] = DefaultTagID.Unified;
+        }
         return algorithmTags;
     }
 }

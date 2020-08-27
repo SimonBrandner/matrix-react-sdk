@@ -212,7 +212,8 @@ export default createReactClass({
             roomAvatar = <DecoratedRoomAvatar
                 room={this.props.room}
                 avatarSize={32}
-                tag={DefaultTagID.Untagged} // to apply room publicity badging
+                //tag={DefaultTagID.Untagged} // to apply room publicity badging
+                tag={DefaultTagID.Unified} // to apply room publicity badging
                 oobData={this.props.oobData}
                 viewAvatarOnClick={true}
             />;

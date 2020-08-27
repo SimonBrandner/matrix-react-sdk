@@ -61,6 +61,7 @@ interface IState {
 const TAG_ORDER: TagID[] = [
     DefaultTagID.Invite,
     DefaultTagID.Favourite,
+    DefaultTagID.Unified,
     DefaultTagID.DM,
     DefaultTagID.Untagged,
 
@@ -72,8 +73,9 @@ const TAG_ORDER: TagID[] = [
 ];
 const CUSTOM_TAGS_BEFORE_TAG = DefaultTagID.LowPriority;
 const ALWAYS_VISIBLE_TAGS: TagID[] = [
-    DefaultTagID.DM,
-    DefaultTagID.Untagged,
+    //DefaultTagID.DM,
+    //DefaultTagID.Untagged,
+    DefaultTagID.Unified,
 ];
 
 interface ITagAesthetics {
@@ -98,6 +100,15 @@ const TAG_AESTHETICS: {
         sectionLabel: _td("Favourites"),
         isInvite: false,
         defaultHidden: false,
+    },
+    [DefaultTagID.Unified]: {
+        sectionLabel: _td("Normal priority"),
+        isInvite: false,
+        defaultHidden: false,
+        addRoomLabel: _td("Start chat"),
+        onAddRoom: (dispatcher?: Dispatcher<ActionPayload>) => {
+            (dispatcher || defaultDispatcher).dispatch({action: 'view_create_chat'})
+        },
     },
     [DefaultTagID.DM]: {
         sectionLabel: _td("People"),

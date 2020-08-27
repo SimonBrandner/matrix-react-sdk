@@ -16,6 +16,7 @@ limitations under the License.
 
 import { isEnumValue } from "../../utils/enums";
 
+// TODO?
 export enum DefaultTagID {
     Invite = "im.vector.fake.invite",
     Untagged = "im.vector.fake.recent", // legacy: used to just be 'recent rooms' but now it's all untagged rooms
@@ -23,12 +24,14 @@ export enum DefaultTagID {
     LowPriority = "m.lowpriority",
     Favourite = "m.favourite",
     DM = "im.vector.fake.direct",
+    Unified = "de.spiritcroc.fake.unified",
     ServerNotice = "m.server_notice",
 }
 
 export const OrderedDefaultTagIDs = [
     DefaultTagID.Invite,
     DefaultTagID.Favourite,
+    DefaultTagID.Unified,
     DefaultTagID.DM,
     DefaultTagID.Untagged,
     DefaultTagID.LowPriority,

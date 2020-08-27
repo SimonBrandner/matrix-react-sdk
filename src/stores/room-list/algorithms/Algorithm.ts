@@ -551,9 +551,13 @@ export class Algorithm extends EventEmitter {
 
             if (!inTag) {
                 if (DMRoomMap.shared().getUserIdForRoomId(room.roomId)) {
-                    newTags[DefaultTagID.DM].push(room);
+                    // SC: Unified list for DMs and groups
+                    newTags[DefaultTagID.Unified].push(room);
+                    //newTags[DefaultTagID.DM].push(room);
                 } else {
-                    newTags[DefaultTagID.Untagged].push(room);
+                    // SC: Unified list for DMs and groups
+                    newTags[DefaultTagID.Unified].push(room);
+                    //newTags[DefaultTagID.Untagged].push(room);
                 }
             }
         }
@@ -591,7 +595,8 @@ export class Algorithm extends EventEmitter {
             tags.push(...this.getTagsOfJoinedRoom(room));
         }
 
-        if (!tags.length) tags.push(DefaultTagID.Untagged);
+        //if (!tags.length) tags.push(DefaultTagID.Untagged);
+        if (!tags.length) tags.push(DefaultTagID.Unified);
 
         return tags;
     }
@@ -602,7 +607,9 @@ export class Algorithm extends EventEmitter {
         if (tags.length === 0) {
             // Check to see if it's a DM if it isn't anything else
             if (DMRoomMap.shared().getUserIdForRoomId(room.roomId)) {
-                tags = [DefaultTagID.DM];
+                // SC: Unified list for DMs and groups
+                tags = [DefaultTagID.Unified];
+                //tags = [DefaultTagID.DM];
             }
         }
 
@@ -624,6 +631,7 @@ export class Algorithm extends EventEmitter {
             }
         }
 
+        // TODO-SC
         this.roomIdsToTags = newMap;
     }
 
@@ -742,6 +750,7 @@ export class Algorithm extends EventEmitter {
                 }
 
                 // Update the tag map so we don't regen it in a moment
+                // TODO-SC
                 this.roomIdsToTags[room.roomId] = newTags;
 
                 if (SettingsStore.getValue("advancedRoomListLogging")) {
@@ -809,6 +818,7 @@ export class Algorithm extends EventEmitter {
             // which means we should *always* have a tag to go off of.
             if (!roomTags.length) throw new Error(`Tags cannot be determined for ${room.roomId}`);
 
+            // TODO-SC
             this.roomIdsToTags[room.roomId] = roomTags;
 
             if (SettingsStore.getValue("advancedRoomListLogging")) {
