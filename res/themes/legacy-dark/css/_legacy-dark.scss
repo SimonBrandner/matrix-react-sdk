@@ -131,7 +131,7 @@ $event-redacted-fg-color: #606060;
 $event-redacted-border-color: #000000;
 
 $event-highlight-fg-color: $warning-color;
-$event-highlight-bg-color: #303030;
+$event-highlight-bg-color: transparent;
 
 // event timestamp
 $event-timestamp-color: $text-secondary-color;
@@ -175,7 +175,7 @@ $message-action-bar-hover-border-color: $header-panel-text-primary-color;
 $reaction-row-button-bg-color: $header-panel-bg-color;
 $reaction-row-button-border-color: #616161;
 $reaction-row-button-hover-border-color: $header-panel-text-primary-color;
-$reaction-row-button-selected-bg-color: #689F38;
+$reaction-row-button-selected-bg-color: #33691E;
 $reaction-row-button-selected-border-color: $accent-color;
 
 $kbd-border-color: #000000;

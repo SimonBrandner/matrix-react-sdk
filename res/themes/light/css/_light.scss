@@ -37,7 +37,7 @@ $focus-bg-color: #dddddd;
 $accent-fg-color: #ffffff;
 $accent-color-50pct: rgba($accent-color, 0.5);
 $accent-color-darker: #92caad;
-$accent-color-alt: #303030;
+$accent-color-alt: #368bd6;
 
 $selection-fg-color: $primary-bg-color;
 
@@ -220,7 +220,7 @@ $event-sending-color: #ddd;
 $event-notsent-color: #f44;
 
 $event-highlight-fg-color: $warning-color;
-$event-highlight-bg-color: $yellow-background;
+$event-highlight-bg-color: transparent;
 
 // event redaction
 $event-redacted-fg-color: #e2e2e2;
@@ -299,7 +299,7 @@ $message-action-bar-hover-border-color: $focus-bg-color;
 $reaction-row-button-bg-color: $header-panel-bg-color;
 $reaction-row-button-border-color: #e9edf1;
 $reaction-row-button-hover-border-color: $focus-bg-color;
-$reaction-row-button-selected-bg-color: #689F38;
+$reaction-row-button-selected-bg-color: #DCEDC8;
 $reaction-row-button-selected-border-color: $accent-color;
 
 $kbd-border-color: $reaction-row-button-border-color;
