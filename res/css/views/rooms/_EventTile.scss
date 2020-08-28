@@ -635,9 +635,10 @@ $left-gutter: 64px;
 .sc_EventTile_bubble {
     background-color: $dark-panel-bg-color;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 2px;
     //margin: 10px auto;
     max-width: max-content;
+    position: relative;
     //box-sizing: content-box;
     //display: flex;
     //flex-wrap: wrap;
@@ -659,6 +660,30 @@ $left-gutter: 64px;
     margin-right: 0px;
     margin-left: auto;
     background-color: $message-bubble-outgoing;
+}
+.sc_EventTile_bubble_incoming_tail {
+    @extend .sc_EventTile_bubble_incoming;
+}
+.sc_EventTile_bubble_outgoing_tail {
+    @extend .sc_EventTile_bubble_outgoing;
+}
+.sc_EventTile_bubble_incoming_tail::after {
+    content: '';
+    border: 16px solid transparent;
+    border-top-color: $message-bubble-incoming;
+    border-bottom: 0;
+    position: absolute;
+    left: -8px;
+    top: 0;
+}
+.sc_EventTile_bubble_outgoing_tail::after {
+    content: '';
+    border: 16px solid transparent;
+    border-top-color: $message-bubble-outgoing;
+    border-bottom: 0;
+    position: absolute;
+    right: -8px;
+    top: 0;
 }
 // Left aligned bubbles for outgoing messages as well
 /*

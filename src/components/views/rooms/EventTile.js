@@ -923,11 +923,19 @@ export default createReactClass({
                 var bubbleClasses;
                 var bubbleAreaClasses;
                 if (sentByMe) {
-                    bubbleClasses = "sc_EventTile_bubble_outgoing";
                     bubbleAreaClasses = "sc_EventTile_bubbleArea_outgoing";
+                    if (this.props.continuation) {
+                        bubbleClasses = "sc_EventTile_bubble_outgoing";
+                    } else {
+                        bubbleClasses = "sc_EventTile_bubble_outgoing_tail";
+                    }
                 } else {
-                    bubbleClasses = "sc_EventTile_bubble_incoming";
                     bubbleAreaClasses = "sc_EventTile_bubbleArea_incoming";
+                    if (this.props.continuation) {
+                        bubbleClasses = "sc_EventTile_bubble_incoming";
+                    } else {
+                        bubbleClasses = "sc_EventTile_bubble_incoming_tail";
+                    }
                 }
                 // tab-index=-1 to allow it to be focusable but do not add tab stop for it, primarily for screen readers
                 return (
