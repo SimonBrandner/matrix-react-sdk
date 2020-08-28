@@ -452,7 +452,9 @@ export default createReactClass({
 
             // If hidden, set offset equal to the offset of the final visible avatar or
             // else set it proportional to index
-            left = (hidden ? MAX_READ_AVATARS - 1 : i) * -receiptOffset;
+            //left = (hidden ? MAX_READ_AVATARS - 1 : i) * -receiptOffset;
+            // SC: left-aligned avatars
+            left = (hidden ? MAX_READ_AVATARS - 1 : i) * receiptOffset;
 
             const userId = receipt.userId;
             let readReceiptInfo;
@@ -485,7 +487,7 @@ export default createReactClass({
             if (remainder > 0) {
                 remText = <span className="mx_EventTile_readAvatarRemainder"
                     onClick={this.toggleAllReadAvatars}
-                    style={{ right: "calc(" + toRem(-left) + " + " + receiptOffset + "px)" }}>{ remainder }+
+                    style={{ left: "calc(" + toRem(left) + " + " + receiptOffset + "px)" }}>{ remainder }+
                 </span>;
             }
         }
@@ -937,13 +939,24 @@ export default createReactClass({
                         bubbleClasses = "sc_EventTile_bubble_incoming_tail";
                     }
                 }
+                var msgOption;
+                if (!this.props.readReceipts || this.props.readReceipts.length === 0) {
+                    msgOption = (
+                        <div className="mx_EventTile_msgOption" style={{height: 0}}>
+                            { readAvatars }
+                        </div>
+                    );
+                } else {
+                    msgOption = (
+                        <div className="mx_EventTile_msgOption">
+                            { readAvatars }
+                        </div>
+                    );
+                }
                 // tab-index=-1 to allow it to be focusable but do not add tab stop for it, primarily for screen readers
                 return (
                     <div className={classes} tabIndex={-1} aria-live={ariaLive} aria-atomic="true">
                         { ircTimestamp }
-                        <div className="mx_EventTile_msgOption">
-                            { readAvatars }
-                        </div>
                         { ircPadlock }
                         <div className="mx_EventTile_line">
                             { groupTimestamp }
@@ -972,6 +985,7 @@ export default createReactClass({
                             // the need for further z-indexing chaos)
                         }
                         { avatar }
+                        { msgOption }
                     </div>
                 );
             }
