@@ -75,7 +75,15 @@ $left-gutter: 64px;
     /* the next three lines, along with overflow hidden, truncate long display names */
     white-space: nowrap;
     text-overflow: ellipsis;
+    //max-width: calc(100% - $left-gutter);
+}
+.mx_EventTile {
     max-width: calc(100% - $left-gutter);
+}
+
+.mx_SenderProfile {
+    // Sender-profile within bubble
+    max-width: 100%;
 }
 
 .mx_EventTile .mx_SenderProfile .mx_Flair {
