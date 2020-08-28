@@ -624,7 +624,7 @@ $left-gutter: 64px;
 
 .sc_EventTile_bubbleArea {
     // Max-width 75% for both-side bubbles only
-    //max-width: 75%;
+    max-width: 75%;
     padding: 0px;
 }
 .sc_EventTile_bubbleArea_incoming {
@@ -648,7 +648,6 @@ $left-gutter: 64px;
     margin-right: auto;
     background-color: $message-bubble-incoming;
 }
-/*
 // Right aligned bubble - works, but doesn't look to nice on big screens
 .sc_EventTile_bubbleArea_outgoing {
     @extend .sc_EventTile_bubbleArea;
@@ -661,8 +660,8 @@ $left-gutter: 64px;
     margin-left: auto;
     background-color: $message-bubble-outgoing;
 }
-*/
 // Left aligned bubbles for outgoing messages as well
+/*
 .sc_EventTile_bubbleArea_outgoing {
     @extend .sc_EventTile_bubbleArea_incoming;
 }
@@ -670,3 +669,4 @@ $left-gutter: 64px;
     @extend .sc_EventTile_bubble_incoming;
     background-color: $message-bubble-outgoing;
 }
+*/
