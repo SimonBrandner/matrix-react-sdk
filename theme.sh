@@ -28,6 +28,7 @@ replace_colors() {
     sed -i "s|#2dc2c5|$M_ACCENT|gi" "$f"
     sed -i "s|#5c56f5|$M_ACCENT|gi" "$f"
     sed -i "s|#74d12c|$M_ACCENT|gi" "$f"
+    sed -i "s|\\(\$roomtile-default-badge-bg-color: \\).*;|\\1$M_ACCENT;|gi" "$f"
 }
 
 replace_colors res/themes/dark/css/_dark.scss
