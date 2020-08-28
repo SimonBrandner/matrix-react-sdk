@@ -695,12 +695,20 @@ export default createReactClass({
 
         const readAvatars = this.getReadAvatars();
 
+        const client = MatrixClientPeg.get();
+        const me = client && client.getUserId();
+        const sentByMe = me === this.props.mxEvent.getSender();
+
         let avatar;
         let sender;
         let avatarSize;
         let needsSenderProfile;
 
-        if (this.props.tileShape === "notif") {
+        if (sentByMe && this.props.tileShape !== 'reply_preview' && this.props.tileShape !== 'reply'
+                && this.props.tileShape !== 'notif' && this.props.tileShape !== 'file_grid') {
+            avatarSize = 0;
+            needsSenderProfile = false;
+        } else if (this.props.tileShape === "notif") {
             avatarSize = 24;
             needsSenderProfile = true;
         } else if (tileHandler === 'messages.RoomCreate' || isBubbleMessage) {
@@ -912,11 +920,9 @@ export default createReactClass({
                     this.props.useIRCLayout,
                 );
 
-                const client = MatrixClientPeg.get();
-                const me = client && client.getUserId();
                 var bubbleClasses;
                 var bubbleAreaClasses;
-                if (me === this.props.mxEvent.getSender()) {
+                if (sentByMe) {
                     bubbleClasses = "sc_EventTile_bubble_outgoing";
                     bubbleAreaClasses = "sc_EventTile_bubbleArea_outgoing";
                 } else {
@@ -930,13 +936,13 @@ export default createReactClass({
                         <div className="mx_EventTile_msgOption">
                             { readAvatars }
                         </div>
-                        { sender }
                         { ircPadlock }
                         <div className="mx_EventTile_line">
                             { groupTimestamp }
                             { groupPadlock }
                         <div className={bubbleAreaClasses}>
                         <div className={bubbleClasses}>
+                            { sender }
                             { thread }
                             <EventTileType ref={this._tile}
                                            mxEvent={this.props.mxEvent}
