@@ -123,6 +123,18 @@ limitations under the License.
             mask-image: url('$(res)/img/feather-customised/plus.svg');
         }
 
+        .mx_RoomSublist_auxGroupButton, .mx_RoomSublist_auxDmButton {
+            @extend .mx_RoomSublist_auxButton;
+        }
+
+        .mx_RoomSublist_auxGroupButton::before {
+            mask-image: url('$(res)/img/feather-customised/group-plus.svg');
+        }
+
+        .mx_RoomSublist_auxDmButton::before {
+            mask-image: url('$(res)/img/feather-customised/dm-plus.svg');
+        }
+
         .mx_RoomSublist_menuButton::before {
             mask-image: url('$(res)/img/element-icons/context-menu.svg');
         }

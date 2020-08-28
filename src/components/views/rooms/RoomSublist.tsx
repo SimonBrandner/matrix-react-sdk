@@ -65,7 +65,11 @@ interface IProps {
     startAsHidden: boolean;
     label: string;
     onAddRoom?: () => void;
+    onAddGroupRoom?: () => void;
+    onAddDirectRoom?: () => void;
     addRoomLabel: string;
+    addGroupRoomLabel: string;
+    addDirectRoomLabel: string;
     isMinimized: boolean;
     tagId: TagID;
     onResize: () => void;
@@ -297,6 +301,16 @@ export default class RoomSublist extends React.Component<IProps, IState> {
     private onAddRoom = (e) => {
         e.stopPropagation();
         if (this.props.onAddRoom) this.props.onAddRoom();
+    };
+
+    private onAddGroupRoom = (e) => {
+        e.stopPropagation();
+        if (this.props.onAddGroupRoom) this.props.onAddGroupRoom();
+    };
+
+    private onAddDirectRoom = (e) => {
+        e.stopPropagation();
+        if (this.props.onAddDirectRoom) this.props.onAddDirectRoom();
     };
 
     private applyHeightChange(newHeight: number) {
@@ -644,6 +658,34 @@ export default class RoomSublist extends React.Component<IProps, IState> {
                         );
                     }
 
+                    let addGroupRoomButton = null;
+                    if (!!this.props.onAddGroupRoom) {
+                        addGroupRoomButton = (
+                            <AccessibleTooltipButton
+                                tabIndex={tabIndex}
+                                onClick={this.onAddGroupRoom}
+                                className="mx_RoomSublist_auxGroupButton"
+                                aria-label={this.props.addGroupRoomLabel || _t("Add room")}
+                                title={this.props.addGroupRoomLabel}
+                                tooltipClassName={"mx_RoomSublist_addRoomTooltip"}
+                            />
+                        );
+                    }
+
+                    let addDirectRoomButton = null;
+                    if (!!this.props.onAddDirectRoom) {
+                        addDirectRoomButton = (
+                            <AccessibleTooltipButton
+                                tabIndex={tabIndex}
+                                onClick={this.onAddDirectRoom}
+                                className="mx_RoomSublist_auxDmButton"
+                                aria-label={this.props.addDirectRoomLabel || _t("Add room")}
+                                title={this.props.addDirectRoomLabel}
+                                tooltipClassName={"mx_RoomSublist_addRoomTooltip"}
+                            />
+                        );
+                    }
+
                     const collapseClasses = classNames({
                         'mx_RoomSublist_collapseBtn': true,
                         'mx_RoomSublist_collapseBtn_collapsed': !this.state.isExpanded,
@@ -651,7 +693,7 @@ export default class RoomSublist extends React.Component<IProps, IState> {
 
                     const classes = classNames({
                         'mx_RoomSublist_headerContainer': true,
-                        'mx_RoomSublist_headerContainer_withAux': !!addRoomButton,
+                        'mx_RoomSublist_headerContainer_withAux': !!addRoomButton || !!addGroupRoomButton || !! addDirectRoomButton,
                     });
 
                     const badgeContainer = (
@@ -691,9 +733,13 @@ export default class RoomSublist extends React.Component<IProps, IState> {
                                 {this.renderMenu()}
                                 {this.props.isMinimized ? null : badgeContainer}
                                 {this.props.isMinimized ? null : addRoomButton}
+                                {this.props.isMinimized ? null : addDirectRoomButton}
+                                {this.props.isMinimized ? null : addGroupRoomButton}
                             </div>
                             {this.props.isMinimized ? badgeContainer : null}
                             {this.props.isMinimized ? addRoomButton : null}
+                            {this.props.isMinimized ? addDirectRoomButton : null}
+                            {this.props.isMinimized ? addGroupRoomButton : null}
                         </div>
                     );
                 }}

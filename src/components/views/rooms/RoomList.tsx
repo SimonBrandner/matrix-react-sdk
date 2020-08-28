@@ -82,7 +82,11 @@ interface ITagAesthetics {
     sectionLabel: string;
     sectionLabelRaw?: string;
     addRoomLabel?: string;
+    addGroupRoomLabel?: string;
+    addDirectRoomLabel?: string;
     onAddRoom?: (dispatcher?: Dispatcher<ActionPayload>) => void;
+    onAddGroupRoom?: (dispatcher?: Dispatcher<ActionPayload>) => void;
+    onAddDirectRoom?: (dispatcher?: Dispatcher<ActionPayload>) => void;
     isInvite: boolean;
     defaultHidden: boolean;
 }
@@ -105,9 +109,13 @@ const TAG_AESTHETICS: {
         sectionLabel: _td("Normal priority"),
         isInvite: false,
         defaultHidden: false,
-        addRoomLabel: _td("Start chat"),
-        onAddRoom: (dispatcher?: Dispatcher<ActionPayload>) => {
+        addDirectRoomLabel: _td("Start chat"),
+        addGroupRoomLabel: _td("Create room"),
+        onAddDirectRoom: (dispatcher?: Dispatcher<ActionPayload>) => {
             (dispatcher || defaultDispatcher).dispatch({action: 'view_create_chat'})
+        },
+        onAddGroupRoom: (dispatcher?: Dispatcher<ActionPayload>) => {
+            (dispatcher || defaultDispatcher).dispatch({action: 'view_create_room'})
         },
     },
     [DefaultTagID.DM]: {
@@ -334,7 +342,11 @@ export default class RoomList extends React.PureComponent<IProps, IState> {
                     startAsHidden={aesthetics.defaultHidden}
                     label={aesthetics.sectionLabelRaw ? aesthetics.sectionLabelRaw : _t(aesthetics.sectionLabel)}
                     onAddRoom={aesthetics.onAddRoom}
+                    onAddGroupRoom={aesthetics.onAddGroupRoom}
+                    onAddDirectRoom={aesthetics.onAddDirectRoom}
                     addRoomLabel={aesthetics.addRoomLabel ? _t(aesthetics.addRoomLabel) : aesthetics.addRoomLabel}
+                    addGroupRoomLabel={aesthetics.addGroupRoomLabel ? _t(aesthetics.addGroupRoomLabel) : aesthetics.addGroupRoomLabel}
+                    addDirectRoomLabel={aesthetics.addDirectRoomLabel ? _t(aesthetics.addDirectRoomLabel) : aesthetics.addDirectRoomLabel}
                     isMinimized={this.props.isMinimized}
                     onResize={this.props.onResize}
                     extraBadTilesThatShouldntExist={extraTiles}
