@@ -262,6 +262,7 @@ $left-gutter: 64px;
 }
 
 .mx_EventTile_readAvatars {
+// SC-TODO align left below msg area
     position: relative;
     display: inline-block;
     width: 14px;
@@ -300,7 +301,8 @@ $left-gutter: 64px;
     display: block;
     overflow-y: hidden;
     overflow-x: hidden;
-    margin-right: 34px;
+    // Handled by bubble
+    //margin-right: 34px;
 }
 
 /* De-zalgoing */
@@ -618,4 +620,53 @@ $left-gutter: 64px;
         margin-top: 10px;
         margin-right: 0;
     }
+}
+
+.sc_EventTile_bubbleArea {
+    // Max-width 75% for both-side bubbles only
+    //max-width: 75%;
+    padding: 0px;
+}
+.sc_EventTile_bubbleArea_incoming {
+    @extend .sc_EventTile_bubbleArea;
+    margin-left: 0px;
+    margin-right: auto;
+}
+.sc_EventTile_bubble {
+    background-color: $dark-panel-bg-color;
+    padding: 10px;
+    border-radius: 5px;
+    //margin: 10px auto;
+    max-width: max-content;
+    //box-sizing: content-box;
+    //display: flex;
+    //flex-wrap: wrap;
+}
+.sc_EventTile_bubble_incoming {
+    @extend .sc_EventTile_bubble;
+    margin-left: 0px;
+    margin-right: auto;
+    background-color: $message-bubble-incoming;
+}
+/*
+// Right aligned bubble - works, but doesn't look to nice on big screens
+.sc_EventTile_bubbleArea_outgoing {
+    @extend .sc_EventTile_bubbleArea;
+    margin-right: 0px;
+    margin-left: auto;
+}
+.sc_EventTile_bubble_outgoing {
+    @extend .sc_EventTile_bubble;
+    margin-right: 0px;
+    margin-left: auto;
+    background-color: $message-bubble-outgoing;
+}
+*/
+// Left aligned bubbles for outgoing messages as well
+.sc_EventTile_bubbleArea_outgoing {
+    @extend .sc_EventTile_bubbleArea_incoming;
+}
+.sc_EventTile_bubble_outgoing {
+    @extend .sc_EventTile_bubble_incoming;
+    background-color: $message-bubble-outgoing;
 }

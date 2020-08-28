@@ -912,6 +912,17 @@ export default createReactClass({
                     this.props.useIRCLayout,
                 );
 
+                const client = MatrixClientPeg.get();
+                const me = client && client.getUserId();
+                var bubbleClasses;
+                var bubbleAreaClasses;
+                if (me === this.props.mxEvent.getSender()) {
+                    bubbleClasses = "sc_EventTile_bubble_outgoing";
+                    bubbleAreaClasses = "sc_EventTile_bubbleArea_outgoing";
+                } else {
+                    bubbleClasses = "sc_EventTile_bubble_incoming";
+                    bubbleAreaClasses = "sc_EventTile_bubbleArea_incoming";
+                }
                 // tab-index=-1 to allow it to be focusable but do not add tab stop for it, primarily for screen readers
                 return (
                     <div className={classes} tabIndex={-1} aria-live={ariaLive} aria-atomic="true">
@@ -924,6 +935,8 @@ export default createReactClass({
                         <div className="mx_EventTile_line">
                             { groupTimestamp }
                             { groupPadlock }
+                        <div className={bubbleAreaClasses}>
+                        <div className={bubbleClasses}>
                             { thread }
                             <EventTileType ref={this._tile}
                                            mxEvent={this.props.mxEvent}
@@ -933,9 +946,11 @@ export default createReactClass({
                                            highlightLink={this.props.highlightLink}
                                            showUrlPreview={this.props.showUrlPreview}
                                            onHeightChanged={this.props.onHeightChanged} />
+                        </div>
                             { keyRequestInfo }
                             { reactionsRow }
                             { actionBar }
+                        </div>
                         </div>
                         {
                             // The avatar goes after the event tile as it's absolutely positioned to be over the
