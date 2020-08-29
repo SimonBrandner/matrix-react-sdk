@@ -639,6 +639,7 @@ $left-gutter: 64px;
     @extend .sc_EventTile_bubbleArea;
     margin-left: 0px;
     margin-right: auto;
+    text-align: left;
 }
 .sc_EventTile_bubble {
     background-color: $dark-panel-bg-color;
@@ -657,11 +658,12 @@ $left-gutter: 64px;
     margin-right: auto;
     background-color: $message-bubble-incoming;
 }
-// Right aligned bubble - works, but doesn't look to nice on big screens
+// Right aligned bubble
 .sc_EventTile_bubbleArea_outgoing {
     @extend .sc_EventTile_bubbleArea;
     margin-right: 0px;
     margin-left: auto;
+    text-align: right;
 }
 .sc_EventTile_bubble_outgoing {
     @extend .sc_EventTile_bubble;
