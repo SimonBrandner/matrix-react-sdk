@@ -78,7 +78,9 @@ $left-gutter: 64px;
     //max-width: calc(100% - $left-gutter);
 }
 .mx_EventTile {
-    max-width: calc(100% - $left-gutter);
+    //max-width: calc(100% - $left-gutter);
+    // SC: no reserved space for read recipts required.
+    max-width: 100%;
 }
 
 .mx_SenderProfile {
