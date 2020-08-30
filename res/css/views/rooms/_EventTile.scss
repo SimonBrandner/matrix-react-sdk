@@ -659,6 +659,9 @@ $left-gutter: 64px;
     //box-sizing: content-box;
     //display: flex;
     //flex-wrap: wrap;
+
+    // Don't inherit bubbleArea alignment
+    text-align: left;
 }
 .sc_EventTile_bubble_incoming {
     @extend .sc_EventTile_bubble;
