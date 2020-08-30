@@ -141,6 +141,7 @@
     "Publish this room to the public in %(domain)s's room directory?": "Publish this room to the public in %(domain)s's room directory?",
     "Logout": "Logout",
     "Low priority": "Low priority",
+    "Normal priority": "Normal priority",
     "%(senderName)s made future room history visible to all room members, from the point they are invited.": "%(senderName)s made future room history visible to all room members, from the point they are invited.",
     "%(senderName)s made future room history visible to all room members, from the point they joined.": "%(senderName)s made future room history visible to all room members, from the point they joined.",
     "%(senderName)s made future room history visible to all room members.": "%(senderName)s made future room history visible to all room members.",
