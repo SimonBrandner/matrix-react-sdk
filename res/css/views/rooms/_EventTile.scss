@@ -675,7 +675,7 @@ $left-gutter: 0px;//64px;
 // Right aligned bubble
 .sc_EventTile_bubbleArea_outgoing {
     @extend .sc_EventTile_bubbleArea;
-    margin-right: 0px;
+    margin-right: 8px;
     margin-left: auto;
     text-align: right;
 }
