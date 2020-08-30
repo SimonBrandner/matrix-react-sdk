@@ -4,6 +4,7 @@
 // set the user avatar (if any) as a background so
 // it can be blurred by the tag panel and room list
 
+/*
 @supports (backdrop-filter: none) {
     .mx_LeftPanel {
         background-image: var(--avatar-url);
@@ -20,6 +21,7 @@
         backdrop-filter: blur($roomlist-background-blur-amount);
     }
 }
+*/
 
 .mx_RoomSublist_showNButton {
     background-color: transparent !important;
