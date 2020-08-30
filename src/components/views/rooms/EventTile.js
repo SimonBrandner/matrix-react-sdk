@@ -700,7 +700,7 @@ export default createReactClass({
         const client = MatrixClientPeg.get();
         const me = client && client.getUserId();
         const scBubbleEnabled = !isBubbleMessage && !isInfoMessage
-                this.props.tileShape !== 'reply_preview' && this.props.tileShape !== 'reply'
+                && this.props.tileShape !== 'reply_preview' && this.props.tileShape !== 'reply'
                 && this.props.tileShape !== 'notif' && this.props.tileShape !== 'file_grid';
         const sentByMe = me === this.props.mxEvent.getSender();
 
