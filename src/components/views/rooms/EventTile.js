@@ -767,6 +767,7 @@ export default createReactClass({
             getTile={this.getTile}
             getReplyThread={this.getReplyThread}
             onFocusChange={this.onActionBarFocusChange}
+            showLeft={!sentByMe}
         /> : undefined;
 
         const timestamp = this.props.mxEvent.getTs() ?
