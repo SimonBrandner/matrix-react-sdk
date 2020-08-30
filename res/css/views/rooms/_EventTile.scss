@@ -15,8 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// SC: no reserved space on the side necessary: read recipts moved below messages
-$left-gutter: 0px;//64px;
+$left-gutter: 64px;
 
 .mx_EventTile {
     max-width: 100%;
