@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -s globstar
+
 mydir="$(dirname "$(realpath "$0")")"
 
 # Require clean git state
@@ -12,12 +14,13 @@ fi
 pushd "$mydir" > /dev/null
 
 M_ACCENT="#8BC34A"
+M_ACCENT_DEC="139, 195, 74"
 M_ACCENT_DARK="#33691E"
 M_ACCENT_LIGHT="#DCEDC8"
 M_LINK="#368bd6"
 
 replace_colors() {
-    f="$1"
+    local f="$1"
     if [[ "$f" =~ "dark" ]]; then
         BG_ACCENT="$M_ACCENT_DARK"
     else
@@ -65,7 +68,10 @@ replace_colors() {
     sed -i "s|#2dc2c5|$M_ACCENT|gi" "$f"
     sed -i "s|#5c56f5|$M_ACCENT|gi" "$f"
     sed -i "s|#74d12c|$M_ACCENT|gi" "$f"
+    sed -i "s|#76CFA6|$M_ACCENT|gi" "$f"
+    sed -i "s|rgba(3, 179, 129,|rgba($M_ACCENT_DEC,|gi" "$f"
     sed -i "s|\\(\$accent-color-alt: \\).*;|\\1$M_LINK;|gi" "$f"
+    sed -i "s|\\(\$accent-color-darker: \\).*;|\\1$M_ACCENT_DARK;|gi" "$f"
     sed -i "s|\\(\$roomtile-default-badge-bg-color: \\).*;|\\1$M_ACCENT;|gi" "$f"
     sed -i "s|\\(\$reaction-row-button-selected-bg-color: \\).*;|\\1$BG_ACCENT;|gi" "$f"
 }
@@ -74,6 +80,9 @@ replace_colors res/themes/dark/css/_dark.scss
 replace_colors res/themes/light/css/_light.scss
 replace_colors res/themes/legacy-light/css/_legacy-light.scss
 replace_colors res/themes/legacy-dark/css/_legacy-dark.scss
+for f in res/**/*.svg; do
+    replace_colors "$f"
+done
 
 popd > /dev/null
 
