@@ -15,7 +15,7 @@ $monospace-font-family: Inconsolata, Twemoji, 'Apple Color Emoji', 'Segoe UI Emo
 // unified palette
 // try to use these colors when possible
 $accent-color: #03b381;
-$accent-bg-color: rgba(3, 179, 129, 0.16);
+$accent-bg-color: rgba(139, 195, 74, 0.16);
 $notice-primary-color: #ff4b55;
 $notice-primary-bg-color: rgba(255, 75, 85, 0.16);
 $notice-secondary-color: #616161;
@@ -34,8 +34,8 @@ $focus-bg-color: #dddddd;
 
 // button UI (white-on-green in light skin)
 $accent-fg-color: #ffffff;
-$accent-color-50pct: rgba(3, 179, 129, 0.5);    //#03b381 in rgb
-$accent-color-darker: #92caad;
+$accent-color-50pct: rgba(139, 195, 74, 0.5);    //#03b381 in rgb
+$accent-color-darker: #33691E;
 $accent-color-alt: #368bd6;
 
 $selection-fg-color: $primary-bg-color;
