@@ -664,6 +664,13 @@ export default createReactClass({
         const isRedacted = isMessageEvent(this.props.mxEvent) && this.props.isRedacted;
         const isEncryptionFailure = this.props.mxEvent.isDecryptionFailure();
 
+        const client = MatrixClientPeg.get();
+        const me = client && client.getUserId();
+        const scBubbleEnabled = !isBubbleMessage && !isInfoMessage
+                && this.props.tileShape !== 'reply_preview' && this.props.tileShape !== 'reply'
+                && this.props.tileShape !== 'notif' && this.props.tileShape !== 'file_grid';
+        const sentByMe = me === this.props.mxEvent.getSender();
+
         const isEditing = !!this.props.editState;
         const classes = classNames({
             mx_EventTile_bubbleContainer: isBubbleMessage,
@@ -685,6 +692,7 @@ export default createReactClass({
             mx_EventTile_unknown: !isBubbleMessage && this.state.verified === E2E_STATE.UNKNOWN,
             mx_EventTile_bad: isEncryptionFailure,
             mx_EventTile_emote: msgtype === 'm.emote',
+            sc_EventTile_bubbleTailLeftContainer: scBubbleEnabled && !sentByMe && !this.props.continuation,
         });
 
         // If the tile is in the Sending state, don't speak the message.
@@ -696,13 +704,6 @@ export default createReactClass({
         }
 
         const readAvatars = this.getReadAvatars();
-
-        const client = MatrixClientPeg.get();
-        const me = client && client.getUserId();
-        const scBubbleEnabled = !isBubbleMessage && !isInfoMessage
-                && this.props.tileShape !== 'reply_preview' && this.props.tileShape !== 'reply'
-                && this.props.tileShape !== 'notif' && this.props.tileShape !== 'file_grid';
-        const sentByMe = me === this.props.mxEvent.getSender();
 
         let avatar;
         let sender;
@@ -941,8 +942,8 @@ export default createReactClass({
                 }
 
                 if (scBubbleEnabled) {
-                    var bubbleClasses;
-                    var bubbleAreaClasses;
+                    let bubbleClasses;
+                    let bubbleAreaClasses;
                     if (sentByMe) {
                         bubbleAreaClasses = "sc_EventTile_bubbleArea_outgoing";
                         if (this.props.continuation) {
@@ -958,6 +959,8 @@ export default createReactClass({
                             bubbleClasses = "sc_EventTile_bubble_incoming_tail";
                         }
                     }
+
+
                     // tab-index=-1 to allow it to be focusable but do not add tab stop for it, primarily for screen readers
                     return (
                         <div className={classes} tabIndex={-1} aria-live={ariaLive} aria-atomic="true">

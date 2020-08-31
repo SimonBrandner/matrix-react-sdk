@@ -720,3 +720,9 @@ $left-gutter: 64px;
     background-color: $message-bubble-outgoing;
 }
 */
+
+.sc_EventTile_bubbleTailLeftContainer {
+    .mx_EventTile_e2eIcon, .mx_MessageTimestamp {
+        top: 30px;
+    }
+}
