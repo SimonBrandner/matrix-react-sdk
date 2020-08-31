@@ -401,6 +401,7 @@ export default class AppearanceUserSettingsTab extends React.Component<IProps, I
                 "Set the name of a font installed on your system & %(brand)s will attempt to use it.",
                 { brand },
             );
+            /*
             advanced = <>
                 <SettingsFlag
                     name="useCompactLayout"
@@ -414,6 +415,8 @@ export default class AppearanceUserSettingsTab extends React.Component<IProps, I
                     useCheckbox={true}
                     onChange={(checked) => this.setState({useIRCLayout: checked})}
                 />
+                */
+            advanced = <>
                 <SettingsFlag
                     name="useSystemFont"
                     level={SettingLevel.DEVICE}
