@@ -726,3 +726,9 @@ $left-gutter: 64px;
         top: 30px;
     }
 }
+// Undo sc_EventTile_bubbleTailLeftContainer offset
+.mx_ReplyThread {
+    .mx_EventTile_e2eIcon, .mx_MessageTimestamp {
+        top: 4px;
+    }
+}
