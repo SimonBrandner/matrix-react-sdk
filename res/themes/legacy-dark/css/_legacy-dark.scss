@@ -15,6 +15,8 @@ $room-highlight-color: #424242;
 
 // typical text (dark-on-white in light skin)
 $primary-fg-color: $text-primary-color;
+$secondary-fg-color: $primary-fg-color;
+$tertiary-fg-color: $primary-fg-color;
 $primary-bg-color: $bg-color;
 $muted-fg-color: $header-panel-text-primary-color;
 
@@ -109,9 +111,12 @@ $composer-e2e-icon-color: $header-panel-text-primary-color;
 $theme-button-bg-color: #eeeeee;
 
 $roomlist-button-bg-color: #303030; // Buttons include the filter box, explore button, and sublist buttons
+$roomlist-filter-active-bg-color: $roomlist-button-bg-color;
 $roomlist-bg-color: $header-panel-bg-color;
 
 $roomsublist-divider-color: $primary-fg-color;
+
+$tagpanel-divider-color: $roomlist-header-color;
 
 $roomtile-preview-color: #9e9e9e;
 $roomtile-default-badge-bg-color: #8BC34A;
