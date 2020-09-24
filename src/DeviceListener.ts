@@ -30,7 +30,7 @@ import {
     showToast as showUnverifiedSessionsToast,
 } from "./toasts/UnverifiedSessionToast";
 import { privateShouldBeEncrypted } from "./createRoom";
-import { isSecretStorageBeingAccessed, accessSecretStorage } from "./CrossSigningManager";
+import { isSecretStorageBeingAccessed, accessSecretStorage } from "./SecurityManager";
 import { isSecureBackupRequired } from './utils/WellKnownUtils';
 import { isLoggedIn } from './components/structures/MatrixChat';
 
@@ -207,16 +207,23 @@ export default class DeviceListener {
         // (we add a listener on sync to do once check after the initial sync is done)
         if (!cli.isInitialSyncComplete()) return;
 
+        // JRS: This will change again in the next PR which moves secret storage
+        // later in the process.
         const crossSigningReady = await cli.isCrossSigningReady();
+        const secretStorageReady = await cli.isSecretStorageReady();
+        const allSystemsReady = crossSigningReady && secretStorageReady;
 
-        if (this.dismissedThisDeviceToast || crossSigningReady) {
+        if (this.dismissedThisDeviceToast || allSystemsReady) {
             hideSetupEncryptionToast();
         } else if (this.shouldShowSetupEncryptionToast()) {
             // make sure our keys are finished downloading
             await cli.downloadKeys([cli.getUserId()]);
             // cross signing isn't enabled - nag to enable it
             // There are 3 different toasts for:
-            if (cli.getStoredCrossSigningForUser(cli.getUserId())) {
+            if (
+                !cli.getCrossSigningId() &&
+                cli.getStoredCrossSigningForUser(cli.getUserId())
+            ) {
                 // Cross-signing on account but this device doesn't trust the master key (verify this session)
                 showSetupEncryptionToast(SetupKind.VERIFY_THIS_SESSION);
             } else {

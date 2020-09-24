@@ -155,6 +155,19 @@ export const Commands = [
         category: CommandCategories.messages,
     }),
     new Command({
+        command: 'lenny',
+        args: '<message>',
+        description: _td('Prepends ( ͡° ͜ʖ ͡°) to a plain-text message'),
+        runFn: function(roomId, args) {
+            let message = '( ͡° ͜ʖ ͡°)';
+            if (args) {
+                message = message + ' ' + args;
+            }
+            return success(MatrixClientPeg.get().sendTextMessage(roomId, message));
+        },
+        category: CommandCategories.messages,
+    }),
+    new Command({
         command: 'plain',
         args: '<message>',
         description: _td('Sends a message as plain text, without interpreting it as markdown'),
@@ -860,12 +873,12 @@ export const Commands = [
                                 _t('WARNING: KEY VERIFICATION FAILED! The signing key for %(userId)s and session' +
                                     ' %(deviceId)s is "%(fprint)s" which does not match the provided key ' +
                                     '"%(fingerprint)s". This could mean your communications are being intercepted!',
-                                    {
-                                        fprint,
-                                        userId,
-                                        deviceId,
-                                        fingerprint,
-                                    }));
+                                {
+                                    fprint,
+                                    userId,
+                                    deviceId,
+                                    fingerprint,
+                                }));
                         }
 
                         await cli.setDeviceVerified(userId, deviceId, true);
@@ -879,7 +892,7 @@ export const Commands = [
                                     {
                                         _t('The signing key you provided matches the signing key you received ' +
                                             'from %(userId)s\'s session %(deviceId)s. Session marked as verified.',
-                                            {userId, deviceId})
+                                        {userId, deviceId})
                                     }
                                 </p>
                             </div>,

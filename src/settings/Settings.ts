@@ -572,7 +572,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     },
     "lastRightPanelPhaseForRoom": {
         supportedLevels: LEVELS_DEVICE_ONLY_SETTINGS,
-        default: RightPanelPhases.RoomMemberInfo,
+        default: RightPanelPhases.RoomSummary,
     },
     "lastRightPanelPhaseForGroup": {
         supportedLevels: LEVELS_DEVICE_ONLY_SETTINGS,
@@ -612,5 +612,9 @@ export const SETTINGS: {[setting: string]: ISetting} = {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         displayName: _td("Enable experimental, compact IRC style layout"),
         default: false,
+    },
+    "Widgets.pinned": {
+        supportedLevels: LEVELS_ROOM_OR_ACCOUNT,
+        default: {},
     },
 };
