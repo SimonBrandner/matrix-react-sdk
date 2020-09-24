@@ -113,7 +113,7 @@ const TAG_AESTHETICS: {
         isInvite: false,
         defaultHidden: false,
         addDirectRoomLabel: _td("Start chat"),
-        addGroupRoomLabel: _td("Create room"),
+        addGroupRoomLabel: _td("Create new room"),
         onAddDirectRoom: (dispatcher?: Dispatcher<ActionPayload>) => {
             (dispatcher || defaultDispatcher).dispatch({action: 'view_create_chat'})
         },
