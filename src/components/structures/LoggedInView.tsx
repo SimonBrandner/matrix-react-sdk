@@ -56,6 +56,7 @@ import { ViewRoomDeltaPayload } from "../../dispatcher/payloads/ViewRoomDeltaPay
 import RoomListStore from "../../stores/room-list/RoomListStore";
 import NonUrgentToastContainer from "./NonUrgentToastContainer";
 import { ToggleRightPanelPayload } from "../../dispatcher/payloads/ToggleRightPanelPayload";
+import { IThreepidInvite } from "../../stores/ThreepidInviteStore";
 
 // We need to fetch each pinned message individually (if we don't already have it)
 // so each pinned message may trigger a request. Limit the number per room for sanity.
@@ -76,13 +77,12 @@ interface IProps {
     hideToSRUsers: boolean;
     resizeNotifier: ResizeNotifier;
     middleDisabled: boolean;
-    initialEventPixelOffset: number;
     leftDisabled: boolean;
     rightDisabled: boolean;
     // eslint-disable-next-line camelcase
     page_type: string;
     autoJoin: boolean;
-    thirdPartyInvite?: object;
+    threepidInvite?: IThreepidInvite;
     roomOobData?: object;
     currentRoomId: string;
     ConferenceHandler?: object;
@@ -632,10 +632,9 @@ class LoggedInView extends React.Component<IProps, IState> {
                     ref={this._roomView}
                     autoJoin={this.props.autoJoin}
                     onRegistered={this.props.onRegistered}
-                    thirdPartyInvite={this.props.thirdPartyInvite}
+                    threepidInvite={this.props.threepidInvite}
                     oobData={this.props.roomOobData}
                     viaServers={this.props.viaServers}
-                    eventPixelOffset={this.props.initialEventPixelOffset}
                     key={this.props.currentRoomId || 'roomview'}
                     disabled={this.props.middleDisabled}
                     ConferenceHandler={this.props.ConferenceHandler}

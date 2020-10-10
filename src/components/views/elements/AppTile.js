@@ -102,6 +102,8 @@ export default class AppTile extends React.Component {
     _getNewState(newProps) {
         // This is a function to make the impact of calling SettingsStore slightly less
         const hasPermissionToLoad = () => {
+            if (this._usingLocalWidget()) return true;
+
             const currentlyAllowedWidgets = SettingsStore.getValue("allowedWidgets", newProps.room.roomId);
             return !!currentlyAllowedWidgets[newProps.app.eventId];
         };
@@ -605,6 +607,15 @@ export default class AppTile extends React.Component {
     }
 
     /**
+     * Whether we're using a local version of the widget rather than loading the
+     * actual widget URL
+     * @returns {bool} true If using a local version of the widget
+     */
+    _usingLocalWidget() {
+        return WidgetType.JITSI.matches(this.props.app.type);
+    }
+
+    /**
      * Get the URL used in the iframe
      * In cases where we supply our own UI for a widget, this is an internal
      * URL different to the one used if the widget is popped out to a separate
@@ -830,7 +841,9 @@ export default class AppTile extends React.Component {
             contextMenu = (
                 <ContextMenu {...aboveLeftOf(elementRect, null)} onFinished={this._closeContextMenu}>
                     <WidgetContextMenu
-                        onUnpinClicked={this._onUnpinClicked}
+                        onUnpinClicked={
+                            ActiveWidgetStore.getWidgetPersistence(this.props.app.id) ? null : this._onUnpinClicked
+                        }
                         onRevokeClicked={this._onRevokeClicked}
                         onEditClicked={showEditButton ? this._onEditClick : undefined}
                         onDeleteClicked={showDeleteButton ? this._onDeleteClick : undefined}
@@ -850,13 +863,13 @@ export default class AppTile extends React.Component {
                         { /* Minimise widget */ }
                         { showMinimiseButton && <AccessibleButton
                             className="mx_AppTileMenuBar_iconButton mx_AppTileMenuBar_iconButton_minimise"
-                            title={_t('Minimize apps')}
+                            title={_t('Minimize widget')}
                             onClick={this._onMinimiseClick}
                         /> }
                         { /* Maximise widget */ }
                         { showMaximiseButton && <AccessibleButton
                             className="mx_AppTileMenuBar_iconButton mx_AppTileMenuBar_iconButton_maximise"
-                            title={_t('Maximize apps')}
+                            title={_t('Maximize widget')}
                             onClick={this._onMinimiseClick}
                         /> }
                         { /* Title */ }

@@ -40,7 +40,9 @@ import TextWithTooltip from "../elements/TextWithTooltip";
 import BaseAvatar from "../avatars/BaseAvatar";
 import AccessibleTooltipButton from "../elements/AccessibleTooltipButton";
 import WidgetStore, {IApp} from "../../../stores/WidgetStore";
+import { E2EStatus } from "../../../utils/ShieldUtils";
 import RoomContext from "../../../contexts/RoomContext";
+import {UIFeature} from "../../../settings/UIFeature";
 
 interface IProps {
     room: Room;
@@ -97,7 +99,7 @@ const AppsSection: React.FC<IAppsSectionProps> = ({ room }) => {
         }
     };
 
-    return <Group className="mx_RoomSummaryCard_appsGroup" title={_t("Apps")}>
+    return <Group className="mx_RoomSummaryCard_appsGroup" title={_t("Widgets")}>
         { apps.map(app => {
             const name = WidgetUtils.getWidgetName(app);
             const dataTitle = WidgetUtils.getWidgetDataTitle(app);
@@ -159,7 +161,7 @@ const AppsSection: React.FC<IAppsSectionProps> = ({ room }) => {
         }) }
 
         <AccessibleButton kind="link" onClick={onManageIntegrations}>
-            { apps.length > 0 ? _t("Edit apps, bridges & bots") : _t("Add apps, bridges & bots") }
+            { apps.length > 0 ? _t("Edit widgets, bridges & bots") : _t("Add widgets, bridges & bots") }
         </AccessibleButton>
     </Group>;
 };
@@ -201,7 +203,7 @@ const RoomSummaryCard: React.FC<IProps> = ({ room, onClose }) => {
 
     const isRoomEncrypted = useIsEncrypted(cli, room);
     const roomContext = useContext(RoomContext);
-    const e2eStatus = roomContext['e2eStatus'];
+    const e2eStatus = roomContext.e2eStatus;
 
     const alias = room.getCanonicalAlias() || room.getAltAliases()[0] || "";
     const header = <React.Fragment>
@@ -211,8 +213,8 @@ const RoomSummaryCard: React.FC<IProps> = ({ room, onClose }) => {
                 tooltip={isRoomEncrypted ? _t("Encrypted") : _t("Not encrypted")}
                 class={classNames("mx_RoomSummaryCard_e2ee", {
                     mx_RoomSummaryCard_e2ee_normal: isRoomEncrypted,
-                    mx_RoomSummaryCard_e2ee_warning: isRoomEncrypted && e2eStatus === "warning",
-                    mx_RoomSummaryCard_e2ee_verified: isRoomEncrypted && e2eStatus === "verified",
+                    mx_RoomSummaryCard_e2ee_warning: isRoomEncrypted && e2eStatus === E2EStatus.Warning,
+                    mx_RoomSummaryCard_e2ee_verified: isRoomEncrypted && e2eStatus === E2EStatus.Verified,
                 })}
             />
         </div>
@@ -241,7 +243,7 @@ const RoomSummaryCard: React.FC<IProps> = ({ room, onClose }) => {
             </Button>
         </Group>
 
-        <AppsSection room={room} />
+        { SettingsStore.getValue(UIFeature.Widgets) && <AppsSection room={room} /> }
     </BaseCard>;
 };
 
