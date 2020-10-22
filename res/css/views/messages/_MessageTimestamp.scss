@@ -19,3 +19,16 @@ limitations under the License.
     font-size: $font-10px;
     font-variant-numeric: tabular-nums;
 }
+
+.sc_EventTile_bubble {
+    .mx_MessageTimestamp {
+        position: unset !important;
+        width: unset !important;
+        text-align: right;
+        float: right;
+        padding-left: 1rem;
+        padding-top: 0.3rem;
+        margin-bottom: -0.3rem;
+        font-size: 0.85em;
+    }
+}

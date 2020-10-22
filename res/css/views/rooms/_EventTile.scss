@@ -656,17 +656,6 @@ $left-gutter: 64px;
 
     // Don't inherit bubbleArea alignment
     text-align: left;
-
-    .mx_MessageTimestamp {
-        position: unset !important;
-        width: unset !important;
-        text-align: right;
-        float: right;
-        padding-left: 1rem;
-        padding-top: 0.3rem;
-        margin-bottom: -0.3rem;
-        font-size: 0.85em;
-    }
 }
 .sc_EventTile_bubble_incoming {
     @extend .sc_EventTile_bubble;
