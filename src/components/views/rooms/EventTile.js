@@ -970,26 +970,26 @@ export default class EventTile extends React.Component {
                         <div className={classes} tabIndex={-1} aria-live={ariaLive} aria-atomic="true">
                             { ircTimestamp }
                             { ircPadlock }
-                            <div className="mx_EventTile_line">
-                                { groupTimestamp }
+                            <div className="mx_EventTile_line sc_EventTile_line">
                                 { groupPadlock }
-                            <div className={bubbleAreaClasses}>
-                            <div className={bubbleClasses}>
-                                { sender }
-                                { thread }
-                                <EventTileType ref={this._tile}
-                                               mxEvent={this.props.mxEvent}
-                                               replacingEventId={this.props.replacingEventId}
-                                               editState={this.props.editState}
-                                               highlights={this.props.highlights}
-                                               highlightLink={this.props.highlightLink}
-                                               showUrlPreview={this.props.showUrlPreview}
-                                               onHeightChanged={this.props.onHeightChanged} />
-                            </div>
-                                { keyRequestInfo }
-                                { reactionsRow }
-                                { actionBar }
-                            </div>
+                                <div className={bubbleAreaClasses}>
+                                    <div className={bubbleClasses}>
+                                        { sender }
+                                        { thread }
+                                        <EventTileType ref={this._tile}
+                                            mxEvent={this.props.mxEvent}
+                                            replacingEventId={this.props.replacingEventId}
+                                            editState={this.props.editState}
+                                            highlights={this.props.highlights}
+                                            highlightLink={this.props.highlightLink}
+                                            showUrlPreview={this.props.showUrlPreview}
+                                            onHeightChanged={this.props.onHeightChanged}
+                                            scBubbleGroupTimestamp={groupTimestamp} />
+                                    </div>
+                                    { keyRequestInfo }
+                                    { reactionsRow }
+                                    { actionBar }
+                                </div>
                             </div>
                             {
                                 // The avatar goes after the event tile as it's absolutely positioned to be over the
