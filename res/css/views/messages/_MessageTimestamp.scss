@@ -24,13 +24,13 @@ limitations under the License.
     .sc_PermaLink_Timestamp {
         float: right;
         display: flex;
+        margin-left: 1rem;
 
         .mx_MessageTimestamp {
             position: unset !important;
             width: unset !important;
             text-align: right !important;
             margin-top: auto;
-            padding-left: 1rem;
             padding-top: 0.3rem;
             margin-bottom: -0.3rem;
             font-size: 0.85em;
