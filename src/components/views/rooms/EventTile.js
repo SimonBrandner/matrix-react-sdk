@@ -822,7 +822,7 @@ export default class EventTile extends React.Component {
             />;
         }
 
-        const linkedTimestamp = <a
+        const linkedTimestamp = <a className="sc_PermaLink_Timestamp"
                 href={permalink}
                 onClick={this.onPermalinkClicked}
                 aria-label={formatTime(new Date(this.props.mxEvent.getTs()), this.props.isTwelveHour)}

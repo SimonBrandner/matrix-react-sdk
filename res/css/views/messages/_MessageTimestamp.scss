@@ -21,14 +21,23 @@ limitations under the License.
 }
 
 .sc_EventTile_bubble {
-    .mx_MessageTimestamp {
-        position: unset !important;
-        width: unset !important;
-        text-align: right;
+    .sc_PermaLink_Timestamp {
         float: right;
-        padding-left: 1rem;
-        padding-top: 0.3rem;
-        margin-bottom: -0.3rem;
-        font-size: 0.85em;
+        display: flex;
+
+        .mx_MessageTimestamp {
+            position: unset !important;
+            width: unset !important;
+            text-align: right !important;
+            margin-top: auto;
+            padding-left: 1rem;
+            padding-top: 0.3rem;
+            margin-bottom: -0.3rem;
+            font-size: 0.85em;
+        }
+    }
+
+    .sc_EventTile_bigContent .sc_PermaLink_Timestamp {
+        height: 57px;
     }
 }
