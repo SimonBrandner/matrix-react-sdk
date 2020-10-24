@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-$left-gutter: 64px;
+$left-gutter: 56px;
 
 .mx_EventTile {
     max-width: 100%;
@@ -629,6 +629,16 @@ $left-gutter: 64px;
     }
 }
 
+.sc_EventTile_bubbleLine {
+    .mx_EventTile_e2eIcon {
+        left: 16px;
+
+        .sc_EventTile_bubbleTailLeftContainer & {
+            top: 30px;
+        }
+    }
+}
+
 .sc_EventTile_bubbleArea {
     // Max-width 75% for both-side bubbles only
     max-width: 75%;
@@ -710,15 +720,3 @@ $left-gutter: 64px;
     background-color: $message-bubble-outgoing;
 }
 */
-
-.sc_EventTile_bubbleTailLeftContainer {
-    .mx_EventTile_e2eIcon, .mx_MessageTimestamp {
-        top: 30px;
-    }
-}
-// Undo sc_EventTile_bubbleTailLeftContainer offset
-.mx_ReplyThread {
-    .mx_EventTile_e2eIcon, .mx_MessageTimestamp {
-        top: 4px;
-    }
-}

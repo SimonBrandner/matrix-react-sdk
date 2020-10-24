@@ -970,7 +970,7 @@ export default class EventTile extends React.Component {
                         <div className={classes} tabIndex={-1} aria-live={ariaLive} aria-atomic="true">
                             { ircTimestamp }
                             { ircPadlock }
-                            <div className="mx_EventTile_line sc_EventTile_line">
+                            <div className="mx_EventTile_line sc_EventTile_bubbleLine">
                                 { groupPadlock }
                                 <div className={bubbleAreaClasses}>
                                     <div className={bubbleClasses}>
