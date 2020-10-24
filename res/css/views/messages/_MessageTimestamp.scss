@@ -27,6 +27,7 @@ limitations under the License.
         margin-left: 1rem;
 
         .mx_MessageTimestamp {
+            visibility: visible !important;
             position: unset !important;
             width: unset !important;
             text-align: right !important;
