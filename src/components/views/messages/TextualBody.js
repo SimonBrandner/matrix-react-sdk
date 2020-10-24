@@ -452,24 +452,24 @@ export default class TextualBody extends React.Component {
                         </span>
                         &nbsp;
                         { body }
-                        { this.props.scBubbleGroupTimestamp }
                         { widgets }
+                        { this.props.scBubbleGroupTimestamp }
                     </span>
                 );
             case "m.notice":
                 return (
                     <span className={ "mx_MNoticeBody mx_EventTile_content" + bigContent }>
                         { body }
-                        { this.props.scBubbleGroupTimestamp }
                         { widgets }
+                        { this.props.scBubbleGroupTimestamp }
                     </span>
                 );
             default: // including "m.text"
                 return (
                     <span className={ "mx_MTextBody mx_EventTile_content" + bigContent }>
                         { body }
-                        { this.props.scBubbleGroupTimestamp }
                         { widgets }
+                        { this.props.scBubbleGroupTimestamp }
                     </span>
                 );
         }
