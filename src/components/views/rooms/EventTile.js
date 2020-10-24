@@ -977,14 +977,14 @@ export default class EventTile extends React.Component {
                                         { sender }
                                         { thread }
                                         <EventTileType ref={this._tile}
-                                            mxEvent={this.props.mxEvent}
-                                            replacingEventId={this.props.replacingEventId}
-                                            editState={this.props.editState}
-                                            highlights={this.props.highlights}
-                                            highlightLink={this.props.highlightLink}
-                                            showUrlPreview={this.props.showUrlPreview}
-                                            onHeightChanged={this.props.onHeightChanged}
-                                            scBubbleGroupTimestamp={groupTimestamp} />
+                                                       mxEvent={this.props.mxEvent}
+                                                       replacingEventId={this.props.replacingEventId}
+                                                       editState={this.props.editState}
+                                                       highlights={this.props.highlights}
+                                                       highlightLink={this.props.highlightLink}
+                                                       showUrlPreview={this.props.showUrlPreview}
+                                                       onHeightChanged={this.props.onHeightChanged}
+                                                       scBubbleGroupTimestamp={groupTimestamp} />
                                     </div>
                                     { keyRequestInfo }
                                     { reactionsRow }
