@@ -21,7 +21,7 @@ limitations under the License.
 }
 
 .sc_EventTile_bubble {
-    .sc_PermaLink_Timestamp {
+    .sc_bubble_LinkedTimestamp {
         float: right;
         display: flex;
         margin-left: 1rem;
@@ -37,7 +37,7 @@ limitations under the License.
         }
     }
 
-    .sc_EventTile_bigContent .sc_PermaLink_Timestamp {
+    .sc_EventTile_bigContent .sc_bubble_LinkedTimestamp {
         height: 57px;
     }
 }

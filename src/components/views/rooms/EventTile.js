@@ -822,7 +822,7 @@ export default class EventTile extends React.Component {
             />;
         }
 
-        const linkedTimestamp = <a className="sc_PermaLink_Timestamp"
+        const linkedTimestamp = <a className={scBubbleEnabled ? "sc_bubble_LinkedTimestamp" : ""}
                 href={permalink}
                 onClick={this.onPermalinkClicked}
                 aria-label={formatTime(new Date(this.props.mxEvent.getTs()), this.props.isTwelveHour)}
