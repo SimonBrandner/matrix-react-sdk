@@ -710,11 +710,11 @@ $left-gutter: 56px;
 .sc_EventTile_bubble_outgoing_tail::after {
     content: '';
     border: 16px solid transparent;
-    border-bottom-color: $message-bubble-outgoing;
-    border-top: 0;
+    border-top-color: $message-bubble-outgoing;
+    border-bottom: 0;
     position: absolute;
     right: -8px;
-    bottom: 0;
+    top: 0;
 }
 // Left aligned bubbles for outgoing messages as well
 /*
