@@ -695,6 +695,7 @@ export default class EventTile extends React.Component {
             mx_EventTile_unknown: !isBubbleMessage && this.state.verified === E2E_STATE.UNKNOWN,
             mx_EventTile_bad: isEncryptionFailure,
             mx_EventTile_emote: msgtype === 'm.emote',
+            sc_EventTile_bubbleContainer: scBubbleEnabled,
             sc_EventTile_bubbleTailLeftContainer: scBubbleEnabled && !sentByMe && !this.props.continuation,
         });
 

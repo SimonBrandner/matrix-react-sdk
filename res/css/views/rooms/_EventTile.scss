@@ -629,6 +629,12 @@ $left-gutter: 56px;
     }
 }
 
+.sc_EventTile_bubbleContainer {
+    > .mx_EventTile_avatar {
+        top: 21px;
+    }
+}
+
 .sc_EventTile_bubbleLine {
     .mx_EventTile_e2eIcon {
         left: 16px;
