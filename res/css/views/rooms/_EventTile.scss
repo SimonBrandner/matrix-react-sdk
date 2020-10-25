@@ -197,7 +197,7 @@ $left-gutter: 56px;
  */
 .mx_EventTile_selected > .mx_EventTile_line {
     border-left: $accent-color 4px solid;
-    padding-left: calc($left-gutter - 4px);
+    padding-left: calc($left-gutter - 4px) !important;
     background-color: $event-selected-color;
 }
 
