@@ -635,15 +635,19 @@ $left-gutter: 56px;
     }
 }
 
-.sc_EventTile_bubbleLine {
-    .mx_EventTile_e2eIcon {
-        left: 16px;
-
-        .sc_EventTile_bubbleTailLeftContainer & {
-            top: 35px;
-        }
-    }
+.mx_EventTile_e2eIcon {
+    display: none !important;
 }
+
+// .sc_EventTile_bubbleLine {
+//     .mx_EventTile_e2eIcon {
+//         left: 16px;
+
+//         .sc_EventTile_bubbleTailLeftContainer & {
+//             top: 35px;
+//         }
+//     }
+// }
 
 .sc_EventTile_bubbleArea {
     // Max-width 75% for both-side bubbles only
