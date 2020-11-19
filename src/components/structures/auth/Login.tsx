@@ -224,7 +224,8 @@ export default class LoginComponent extends React.Component<IProps, IState> {
             } else if (error.errcode === 'M_RESOURCE_LIMIT_EXCEEDED') {
                 const errorTop = messageForResourceLimitError(
                     error.data.limit_type,
-                    error.data.admin_contact, {
+                    error.data.admin_contact,
+                    {
                         'monthly_active_user': _td(
                             "This homeserver has hit its Monthly Active User limit.",
                         ),
@@ -235,10 +236,9 @@ export default class LoginComponent extends React.Component<IProps, IState> {
                 );
                 const errorDetail = messageForResourceLimitError(
                     error.data.limit_type,
-                    error.data.admin_contact, {
-                        '': _td(
-                            "Please <a>contact your service administrator</a> to continue using this service.",
-                        ),
+                    error.data.admin_contact,
+                    {
+                        '': _td("Please <a>contact your service administrator</a> to continue using this service."),
                     },
                 );
                 errorText = (
