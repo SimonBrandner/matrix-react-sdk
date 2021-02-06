@@ -58,9 +58,9 @@ export enum Modifiers {
 // Meta-modifier: isMac ? CMD : CONTROL
 export const CMD_OR_CTRL = isMac ? Modifiers.COMMAND : Modifiers.CONTROL;
 
-interface IKeybind {
+export interface IKeybind {
     modifiers?: Modifiers[];
-    key: string; // TS: fix this once Key is an enum
+    key: Key;
 }
 
 interface IShortcut {
