@@ -32,7 +32,7 @@ import UseSystemFontController from './controllers/UseSystemFontController';
 import { SettingLevel } from "./SettingLevel";
 import SettingController from "./controllers/SettingController";
 import { RightPanelPhases } from "../stores/RightPanelStorePhases";
-import { isMac } from '../Keyboard';
+import { isMac, Key, Modifiers, CMD_OR_CTRL } from "../Keyboard";
 import UIFeatureController from "./controllers/UIFeatureController";
 import { UIFeature } from "./UIFeature";
 import { OrderedMultiController } from "./controllers/OrderedMultiController";
@@ -650,6 +650,305 @@ export const SETTINGS: {[setting: string]: ISetting} = {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: null,
     },
+    // Keybinding settings
+    "Keybind.Composer.toggleBold": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.B,
+        },
+        displayName: _td("Toggle Bold"),
+    },
+    "Keybind.Composer.toggleItalics": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.I,
+        },
+        displayName: _td("Toggle Italics"),
+    },
+    "Keybind.Composer.toggleQuote": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.GREATER_THAN,
+        },
+        displayName: _td("Toggle Quote"),
+    },
+    "Keybind.Composer.newLine": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.SHIFT],
+            key: Key.ENTER,
+        },
+        displayName: _td("New line"),
+    },
+    "Keybind.Composer.cancelReply": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ESCAPE,
+        },
+        displayName: _td("Cancel replying to a message"),
+    },
+    "Keybind.Composer.editNext": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_UP,
+        },
+        displayName: _td("Navigate to next messages to edit"),
+    },
+    "Keybind.Composer.jumpToStart": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.HOME,
+        },
+        displayName: _td("Jump to start of the composer"),
+    },
+    "Keybind.Composer.jumpToEnd": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.END,
+        },
+        displayName: _td("Jump to end of the composer"),
+    },
+    "Keybind.Composer.nextMessageInHistory": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.CONTROL, Modifiers.ALT],
+            key: Key.ARROW_UP,
+        },
+        displayName: _td("Navigate to next message in composer history"),
+    },
+    "Keybind.Composer.previousMessageInHistory": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.CONTROL, Modifiers.ALT],
+            key: Key.ARROW_DOWN,
+        },
+        displayName: _td("Navigate to previous message in composer history"),
+    },
+    "Keybind.Composer.editPrevious": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+             key: Key.ARROW_DOWN,
+        },
+        displayName: _td("Navigate to next previous to edit"),
+    },
+    "Keybind.Calls.toggleMic": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.D,
+        },
+        displayName: _td("Toggle microphone mute"),
+    },
+    "Keybind.Calls.toggleWebcam": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.E,
+        },
+        displayName: _td("Toggle webcam on/off"),
+    },
+    "Keybind.Room.dismissReadMarkerAndJumpToBottom": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ESCAPE,
+        },
+        displayName: _td("Dismiss read marker and jump to bottom"),
+    },
+    "Keybind.Room.jumpToOldestUnreadMessage": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.SHIFT],
+            key: Key.PAGE_UP,
+        },
+        displayName: _td("Jump to oldest unread message"),
+    },
+    "Keybind.Room.uploadFile": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL, Modifiers.SHIFT],
+            key: Key.U,
+        },
+        displayName: _td("Upload a file"),
+    },
+    "Keybind.Room.search": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.F,
+        },
+        displayName: _td("Search (must be enabled)"),
+    },
+    "Keybind.Room.scrollUp": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.PAGE_UP,
+        },
+        displayName: _td("Scroll up in the timeline"),
+    },
+    "Keybind.Room.scrollDown": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.PAGE_DOWN,
+        },
+        displayName: _td("Scroll down in the timeline"),
+    },
+    "Keybind.RoomList.jumpToRoomSearch": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.K,
+        },
+        displayName: _td("Jump to room search"),
+    },
+    "Keybind.RoomList.selectRoom": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ENTER,
+        },
+        displayName: _td("Select room from the room list"),
+    },
+    "Keybind.RoomList.collapseSection": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_LEFT,
+        },
+        displayName: _td("Collapse room list section"),
+    },
+    "Keybind.RoomList.expandSection": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_RIGHT,
+        },
+        displayName: _td("Expand room list section"),
+    },
+    "Keybind.RoomList.clearRoomSearch": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ESCAPE,
+        },
+        displayName: _td("Clear room list filter field"),
+    },
+    "Keybind.RoomList.navigateUp": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_UP,
+        },
+        displayName: _td("Navigate up in the room list"),
+    },
+    "Keybind.RoomList.navigateDown": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_DOWN,
+        },
+        displayName: _td("Navigate down in the room list"),
+    },
+    "Keybind.Navigation.toggleTopLeftMenu": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.BACKTICK,
+        },
+        displayName: _td("Toggle the top left menu"),
+    },
+    "Keybind.Navigation.closeDialogOrContextMenu": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ESCAPE,
+        },
+        displayName: _td("Close dialog or context menu"),
+    },
+    "Keybind.Navigation.activateSelectedButton": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ENTER,
+        },
+        displayName: _td("Activate selected button"),
+    },
+    "Keybind.Navigation.toggleRightPanel": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.PERIOD,
+        },
+        displayName: _td("Toggle right panel"),
+    },
+    "Keybind.Navigation.showKeybindingSettings": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL],
+            key: Key.SLASH,
+        },
+        displayName: _td("Show keybinding settings"),
+    },
+    "Keybind.Navigation.goToHome": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [CMD_OR_CTRL, Modifiers.ALT],
+            key: Key.H,
+        },
+        displayName: _td("Go to Home View"),
+    },
+    "Keybind.Navigation.nextUnreadRoom": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.ALT, Modifiers.SHIFT],
+            key: Key.ARROW_UP,
+        },
+        displayName: _td("Next unread room or DM"),
+    },
+    "Keybind.Navigation.previousUnreadRoom": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.ALT, Modifiers.SHIFT],
+            key: Key.ARROW_DOWN,
+        },
+        displayName: _td("Previous unread room or DM"),
+    },
+    "Keybind.Navigation.nextRoom": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.ALT],
+            key: Key.ARROW_UP,
+        },
+        displayName: _td("Next room or DM"),
+    },
+    "Keybind.Navigation.previousRoom": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            modifiers: [Modifiers.ALT],
+            key: Key.ARROW_DOWN,
+        },
+        displayName: _td("Previous room or DM"),
+    },
+    "Keybind.Autocomplete.cancel": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ESCAPE,
+        },
+        displayName: _td("Cancel autocomplete"),
+    },
+    "Keybind.Autocomplete.next": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_UP,
+        },
+        displayName: _td("Next autocomplete suggestion"),
+    },
+    "Keybind.Autocomplete.previous": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_DOWN,
+        },
+        displayName: _td("Previous autocomplete suggestion"),
+    },
+
+    // Features
     [UIFeature.RoomHistorySettings]: {
         supportedLevels: LEVELS_UI_FEATURE,
         default: true,
