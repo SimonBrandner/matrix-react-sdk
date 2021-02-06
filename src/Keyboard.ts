@@ -16,8 +16,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-import { _td } from "./languageHandler";
-
 export enum Key {
     HOME = "Home",
     END = "End",
@@ -75,21 +73,14 @@ export enum Key {
     Z = "z",
 }
 
-// TS: once languageHandler is TS we can probably inline this into the enum
-_td("Alt");
-_td("Alt Gr");
-_td("Shift");
-_td("Super");
-_td("Ctrl");
-
 export enum Modifiers {
     ALT = "Alt", // Option on Mac and displayed as an Icon
     ALT_GR = "Alt Gr",
-    SHIFT = "SHIFT",
+    SHIFT = "Shift",
     SUPER = "Super", // should this be "Windows"?
     // Instead of using below, consider CMD_OR_CTRL
     COMMAND = "Command", // This gets displayed as an Icon
-    CONTROL = "Ctrl",
+    CONTROL = "Control",
 }
 
 export const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
