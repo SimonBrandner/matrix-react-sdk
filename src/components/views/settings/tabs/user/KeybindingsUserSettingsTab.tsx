@@ -19,6 +19,8 @@ import {_t, _td} from "../../../../../languageHandler";
 import Modal from '../../../../../Modal';
 //import SettingsStore from "../../../../../settings/SettingsStore";
 import AccessibleButton from '../../../elements/AccessibleButton';
+import KeybindingDialog from '../../account/KeybindingDialog';
+import {SETTINGS} from "../../../../../settings/Settings"
 import SettingsStore from '../../../../../settings/SettingsStore';
 
 interface KeybindingIProps {
@@ -40,6 +42,9 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
     }
 
     onChangeKeybinding = (ev) => {
+        Modal.createDialog(KeybindingDialog, {
+            onFinished: this.onDialogFinished,
+        });
     }
 
     render() {
