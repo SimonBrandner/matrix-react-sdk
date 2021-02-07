@@ -99,7 +99,7 @@ export default class KeybindingsUserSettingsTab extends React.Component {
         const sections = this.getSections(Categories);
 
         return (
-            <div className="mx_SettingsTab mx_PreferencesUserSettingsTab">
+            <div className="mx_SettingsTab mx_KeybindingUserSettingsTab">
                 <div className="mx_SettingsTab_heading">{_t("Customize your keybindings")}</div>
                 {sections}
             </div>
