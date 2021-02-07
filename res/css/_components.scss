@@ -73,7 +73,6 @@
 @import "./views/dialogs/_GroupAddressPicker.scss";
 @import "./views/dialogs/_IncomingSasDialog.scss";
 @import "./views/dialogs/_InviteDialog.scss";
-@import "./views/dialogs/_KeyboardShortcutsDialog.scss";
 @import "./views/dialogs/_MessageEditHistoryDialog.scss";
 @import "./views/dialogs/_ModalWidgetDialog.scss";
 @import "./views/dialogs/_NewSessionReviewDialog.scss";
@@ -100,6 +99,7 @@
 @import "./views/dialogs/security/_CreateSecretStorageDialog.scss";
 @import "./views/dialogs/security/_KeyBackupFailedDialog.scss";
 @import "./views/dialogs/security/_RestoreKeyBackupDialog.scss";
+@import "./views/elements/_KeyboardShortcut.scss";
 @import "./views/directory/_NetworkDropdown.scss";
 @import "./views/elements/_AccessibleButton.scss";
 @import "./views/elements/_AddressSelector.scss";
