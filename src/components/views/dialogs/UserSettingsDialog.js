@@ -26,6 +26,7 @@ import AppearanceUserSettingsTab from "../settings/tabs/user/AppearanceUserSetti
 import SecurityUserSettingsTab from "../settings/tabs/user/SecurityUserSettingsTab";
 import NotificationUserSettingsTab from "../settings/tabs/user/NotificationUserSettingsTab";
 import PreferencesUserSettingsTab from "../settings/tabs/user/PreferencesUserSettingsTab";
+import KeybindingsUserSettingsTab from "../settings/tabs/user/KeybindingsUserSettingsTab";
 import VoiceUserSettingsTab from "../settings/tabs/user/VoiceUserSettingsTab";
 import HelpUserSettingsTab from "../settings/tabs/user/HelpUserSettingsTab";
 import FlairUserSettingsTab from "../settings/tabs/user/FlairUserSettingsTab";
@@ -39,6 +40,7 @@ export const USER_APPEARANCE_TAB = "USER_APPEARANCE_TAB";
 export const USER_FLAIR_TAB = "USER_FLAIR_TAB";
 export const USER_NOTIFICATIONS_TAB = "USER_NOTIFICATIONS_TAB";
 export const USER_PREFERENCES_TAB = "USER_PREFERENCES_TAB";
+export const USER_KEYBINDINGS_TAB = "USER_KEYBINDINGS_TAB";
 export const USER_VOICE_TAB = "USER_VOICE_TAB";
 export const USER_SECURITY_TAB = "USER_SECURITY_TAB";
 export const USER_LABS_TAB = "USER_LABS_TAB";
@@ -106,6 +108,12 @@ export default class UserSettingsDialog extends React.Component {
             _td("Preferences"),
             "mx_UserSettingsDialog_preferencesIcon",
             <PreferencesUserSettingsTab />,
+        ));
+        tabs.push(new Tab(
+            USER_PREFERENCES_TAB,
+            _td("Keybindings"),
+            "mx_UserSettingsDialog_preferencesIcon",
+            <KeybindingsUserSettingsTab />,
         ));
 
         if (SettingsStore.getValue(UIFeature.Voip)) {
