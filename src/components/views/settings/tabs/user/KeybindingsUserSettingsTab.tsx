@@ -42,7 +42,7 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
         };
     }
 
-    onDialogFinished = (newKeybinding) => {
+    onSetKeybinding = (newKeybinding) => {
         if (newKeybinding == null) return;
     }
 
@@ -52,9 +52,9 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
         });
     }
 
-    onEditKeybinding = (ev) => {
+    showKeybindingDialog = (ev) => {
         Modal.createDialog(KeybindingDialog, {
-            onFinished: this.onDialogFinished,
+            onFinished: this.onSetKeybinding,
         });
     }
 
@@ -66,7 +66,7 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
         if (value) {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
                 <Shortcut keybind={value}></Shortcut>
-                <AccessibleButton kind="primary" onClick={this.onEditKeybinding}>
+                <AccessibleButton kind="primary" onClick={this.showKeybindingDialog}>
                     {_t("Edit")}
                 </AccessibleButton>
                 <AccessibleButton kind="danger" onClick={this.onRemoveKeybinding}>
@@ -75,7 +75,7 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
             </div>;
         } else {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
-                <AccessibleButton kind="primary" onClick={this.onEditKeybinding}>
+                <AccessibleButton kind="primary" onClick={this.showKeybindingDialog}>
                     {_t("Add")}
                 </AccessibleButton>
             </div>
