@@ -22,26 +22,37 @@ import AccessibleButton from '../../../elements/AccessibleButton';
 import KeybindingDialog from '../../account/KeybindingDialog';
 import {SETTINGS} from "../../../../../settings/Settings"
 import SettingsStore from '../../../../../settings/SettingsStore';
+import Shortcut from '../../../elements/KeyboardShortcut';
+import { IKeybind } from '../../../../../Keyboard';
 
 interface KeybindingIProps {
     settingName: string;
 }
 interface KeybindingIState {
+    currentKeybinding: IKeybind;
 }
 
+// TODO: Handle conflicts
 export class Keybinding extends React.Component<KeybindingIProps, KeybindingIState> {
     constructor(props: KeybindingIProps) {
         super(props);
 
         this.state = {
+            currentKeybinding: SettingsStore.getValue(this.props.settingName),
         };
     }
 
     onDialogFinished = (newKeybinding) => {
-
+        if (newKeybinding == null) return;
     }
 
-    onChangeKeybinding = (ev) => {
+    onRemoveKeybinding = (ev) => {
+        this.setState({
+            currentKeybinding: null,
+        });
+    }
+
+    onEditKeybinding = (ev) => {
         Modal.createDialog(KeybindingDialog, {
             onFinished: this.onDialogFinished,
         });
@@ -49,10 +60,32 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
 
     render() {
         const label = SettingsStore.getDisplayName(this.props.settingName);
+        const value = this.state.currentKeybinding;
+
+        let buttons;
+        if (value) {
+            buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
+                <Shortcut keybind={value}></Shortcut>
+                <AccessibleButton kind="primary" onClick={this.onEditKeybinding}>
+                    {_t("Edit")}
+                </AccessibleButton>
+                <AccessibleButton kind="danger" onClick={this.onRemoveKeybinding}>
+                    {_t("Remove")}
+                </AccessibleButton>
+            </div>;
+        } else {
+            buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
+                <AccessibleButton kind="primary" onClick={this.onEditKeybinding}>
+                    {_t("Add")}
+                </AccessibleButton>
+            </div>
+        }
+
         return (
-            <AccessibleButton onClick={this.onChangeKeybinding}>
+            <div className="mx_KeybindingUserSettingsTab_keybind">
                 {label}
-            </AccessibleButton>
+                {buttons}
+            </div>
         );
     }
 }
