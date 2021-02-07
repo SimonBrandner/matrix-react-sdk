@@ -58,7 +58,7 @@ interface IProps {
 export default class Shortcut extends React.Component<IProps> {
     render() {
         const key = this.props.keybind.key;
-        const modifiers = this.props.keybind.modifiers.map((modifier) => {
+        const modifiers = this.props.keybind.modifiers?.map((modifier) => {
             return (
                 <React.Fragment key={modifier}>
                     <kbd>{ modifierIcon[modifier] || alternateModifierName[modifier] || modifier }</kbd>+
