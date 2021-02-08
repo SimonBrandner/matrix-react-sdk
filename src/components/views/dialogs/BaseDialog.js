@@ -51,6 +51,9 @@ export default class BaseDialog extends React.Component {
         // called when a key is pressed
         onKeyDown: PropTypes.func,
 
+        // called when a key is released
+        onKeyUp: PropTypes.func,
+
         // CSS class to apply to dialog div
         className: PropTypes.string,
 
@@ -102,6 +105,12 @@ export default class BaseDialog extends React.Component {
         }
     };
 
+    _onKeyUp = (e) => {
+        if (this.props.onKeyUp) {
+            this.props.onKeyUp(e);
+        }
+    };
+
     _onCancelClick = (e) => {
         this.props.onFinished(false);
     };
@@ -127,6 +136,7 @@ export default class BaseDialog extends React.Component {
                     returnFocus={true}
                     lockProps={{
                         onKeyDown: this._onKeyDown,
+                        onKeyUp: this._onKeyUp,
                         role: "dialog",
                         ["aria-labelledby"]: "mx_BaseDialog_title",
                         // This should point to a node describing the dialog.
