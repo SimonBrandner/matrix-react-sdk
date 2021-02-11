@@ -122,12 +122,12 @@ export default class KeybindingsUserSettingsTab extends React.Component {
 
     render() {
         const Categories = new Map([
-            ["Keybind.Composer", _td("Composer")],
-            ["Keybind.Calls", _td("Calls")],
-            ["Keybind.Room", _td("Room")],
-            ["Keybind.RoomList", _td("RoomList")],
-            ["Keybind.Navigation", _td("Navigation")],
-            ["Keybind.Autocomplete", _td("Autocomplete")],
+            ["Keybind.Composer.", _td("Composer")],
+            ["Keybind.Calls.", _td("Calls")],
+            ["Keybind.Room.", _td("Room")],
+            ["Keybind.RoomList.", _td("RoomList")],
+            ["Keybind.Navigation.", _td("Navigation")],
+            ["Keybind.Autocomplete.", _td("Autocomplete")],
         ]);
         const sections = this.getSections(Categories);
 
