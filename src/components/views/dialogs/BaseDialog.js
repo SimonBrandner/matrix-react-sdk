@@ -75,6 +75,9 @@ export default class BaseDialog extends React.Component {
         // If provided, this is used to add a aria-describedby attribute
         contentId: PropTypes.string,
 
+        // This determines whether we should quit when escape is pressed
+        quitOnEscape: PropTypes.bool,
+
         // optional additional class for the title element (basically anything that can be passed to classnames)
         titleClass: PropTypes.oneOfType([
             PropTypes.string,
@@ -86,6 +89,7 @@ export default class BaseDialog extends React.Component {
     static defaultProps = {
         hasCancel: true,
         fixedWidth: true,
+        quitOnEscape: true,
     };
 
     constructor(props) {
@@ -98,7 +102,7 @@ export default class BaseDialog extends React.Component {
         if (this.props.onKeyDown) {
             this.props.onKeyDown(e);
         }
-        if (this.props.hasCancel && e.key === Key.ESCAPE) {
+        if (this.props.hasCancel && this.props.quitOnEscape && e.key === Key.ESCAPE) {
             e.stopPropagation();
             e.preventDefault();
             this.props.onFinished(false);
