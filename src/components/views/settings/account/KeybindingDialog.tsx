@@ -38,6 +38,8 @@ export default class KeybindingDialog extends React.Component<IProps, IState> {
     }
 
     onKeyDown = (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
         const key = ev.key;
         if (key == Key.ESCAPE) {
             this.props.onFinished(null);
