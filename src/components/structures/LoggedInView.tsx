@@ -54,6 +54,8 @@ import { IThreepidInvite } from "../../stores/ThreepidInviteStore";
 import Modal from "../../Modal";
 import { ICollapseConfig } from "../../resizer/distributors/collapse";
 import HostSignupContainer from '../views/host_signup/HostSignupContainer';
+import { OpenToTabPayload } from "../../dispatcher/payloads/OpenToTabPayload";
+import { USER_KEYBINDINGS_TAB } from "../views/dialogs/UserSettingsDialog";
 
 // We need to fetch each pinned message individually (if we don't already have it)
 // so each pinned message may trigger a request. Limit the number per room for sanity.
@@ -449,7 +451,11 @@ class LoggedInView extends React.Component<IProps, IState> {
 
             case Key.SLASH:
                 if (isOnlyCtrlOrCmdIgnoreShiftKeyEvent(ev)) {
-                    // TODO: Show keybinding settings
+                    const payload: OpenToTabPayload = {
+                        action: Action.ViewUserSettings,
+                        initialTabId: USER_KEYBINDINGS_TAB,
+                    };
+                    dis.dispatch(payload);
                     handled = true;
                 }
                 break;
