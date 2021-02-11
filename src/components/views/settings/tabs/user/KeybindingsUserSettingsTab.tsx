@@ -17,7 +17,6 @@ limitations under the License.
 import React from 'react';
 import {_t, _td} from "../../../../../languageHandler";
 import Modal from '../../../../../Modal';
-//import SettingsStore from "../../../../../settings/SettingsStore";
 import AccessibleButton from '../../../elements/AccessibleButton';
 import KeybindingDialog from '../../account/KeybindingDialog';
 import {SETTINGS} from "../../../../../settings/Settings"
