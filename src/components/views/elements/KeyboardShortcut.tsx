@@ -58,18 +58,21 @@ interface IProps {
 export default class Shortcut extends React.Component<IProps> {
     render() {
         const key = this.props.keybind.key;
-        const modifiers = this.props.keybind.modifiers?.map((modifier) => {
+        const modifiers = this.props.keybind.modifiers;
+
+        const modifiersElement = modifiers?.map((modifier) => {
             return (
                 <React.Fragment key={modifier}>
                     <kbd>{ modifierIcon[modifier] || alternateModifierName[modifier] || modifier }</kbd>+
                 </React.Fragment>
             );
         });
+        const keyElement = key ? <kbd>{ keyIcon[key] || alternateKeyName[key] || key }</kbd> : null;
 
         return (
             <div className="mx_KeyboardShortcut">
-                {modifiers}
-                <kbd>{ keyIcon[key] || alternateKeyName[key] || key }</kbd>
+                {modifiersElement}
+                {keyElement}
             </div>
         );
     }
