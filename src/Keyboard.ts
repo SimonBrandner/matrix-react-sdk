@@ -108,3 +108,13 @@ export function isOnlyCtrlOrCmdIgnoreShiftKeyEvent(ev) {
         return ev.ctrlKey && !ev.altKey && !ev.metaKey;
     }
 }
+
+export function isModifier(keybind: IKeybind): boolean {
+    console.log(keybind);
+    if (!keybind.modifiers) return false;
+    if (!keybind.key) return true;
+    for (const modifier of keybind.modifiers) {
+        if (keybind.key.toString() === modifier.toString()) return true;
+    }
+    return false;
+}
