@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import React from 'react';
-import { Key, IKeybind, Modifiers } from '../../../../Keyboard';
+import { Key, IKeybind, Modifiers, isModifier } from '../../../../Keyboard';
 import {_t} from "../../../../languageHandler";
 import BaseDialog from "../../dialogs/BaseDialog"
 import KeyboardShortcut from "../../elements/KeyboardShortcut"
@@ -25,7 +25,7 @@ interface IState {
 }
 
 interface IProps {
-    onFinished: (newKeybinding: null) => void;
+    onFinished: (newKeybinding: IKeybind | null) => void;
 }
 
 export default class KeybindingDialog extends React.Component<IProps, IState> {
@@ -37,32 +37,46 @@ export default class KeybindingDialog extends React.Component<IProps, IState> {
         }
     }
 
+    keys: Array<IKeybind> = [];
+    timeout;
+
     onKeyDown = (ev) => {
         ev.preventDefault();
         ev.stopPropagation();
+        clearTimeout(this.timeout);
+
         const key = ev.key;
-        if (key == Key.ESCAPE) {
-            this.props.onFinished(null);
-            return;
-        }
+        this.keys.push(key);
+
         // TODO: Handle other modifiers like ALT_GR
         const modifiers = [];
-        if (ev.altKey) modifiers.push(Modifiers.ALT)
-        if (ev.shiftKey) modifiers.push(Modifiers.SHIFT)
-        if (ev.metaKey) modifiers.push(Modifiers.SUPER)
-        if (ev.ctrlKey) modifiers.push(Modifiers.CONTROL)
+        if (ev.altKey) modifiers.push(Modifiers.ALT);
+        if (ev.shiftKey) modifiers.push(Modifiers.SHIFT);
+        if (ev.metaKey) modifiers.push(Modifiers.SUPER);
+        if (ev.ctrlKey) modifiers.push(Modifiers.CONTROL);
 
-        for (const modifier of modifiers) {
-            console.log("LOG", key, modifier, modifiers)
-            if (key === modifier) return;
+        const keybind: IKeybind = {
+            key: key,
+            modifiers: modifiers,
+        }
+
+        if (isModifier(keybind)) {
+            keybind.key = null;
         }
 
         this.setState({
-            currentKeybinding: {
-                key: key,
-                modifiers: modifiers,
-            },
+            currentKeybinding: keybind,
         });
+    }
+
+    onKeyUp = (ev) => {
+        this.keys.splice(this.keys.indexOf(ev.key), 1);
+        if (this.keys.length > 0) return;
+        if (isModifier(this.state.currentKeybinding)) return;
+
+        this.timeout = setTimeout(() => {
+            this.props.onFinished(this.state.currentKeybinding);
+        }, 500);
     }
 
     render() {
@@ -73,6 +87,8 @@ export default class KeybindingDialog extends React.Component<IProps, IState> {
         return (
             <BaseDialog
                 onKeyDown={this.onKeyDown}
+                onKeyUp={this.onKeyUp}
+                quitOnEscape={false}
                 onFinished={() => this.props.onFinished(null)}
                 title={_t("Set keybinding")}
             >

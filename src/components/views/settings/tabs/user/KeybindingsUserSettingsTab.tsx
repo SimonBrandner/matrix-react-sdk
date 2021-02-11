@@ -21,9 +21,10 @@ import Modal from '../../../../../Modal';
 import AccessibleButton from '../../../elements/AccessibleButton';
 import KeybindingDialog from '../../account/KeybindingDialog';
 import {SETTINGS} from "../../../../../settings/Settings"
+import {SettingLevel} from "../../../../../settings/SettingLevel";
 import SettingsStore from '../../../../../settings/SettingsStore';
 import Shortcut from '../../../elements/KeyboardShortcut';
-import { IKeybind } from '../../../../../Keyboard';
+import {IKeybind} from '../../../../../Keyboard';
 
 interface KeybindingIProps {
     settingName: string;
@@ -42,8 +43,12 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
         };
     }
 
-    onSetKeybinding = (newKeybinding) => {
+    onSetKeybinding = (newKeybinding: IKeybind) => {
         if (newKeybinding == null) return;
+        this.setState({
+            currentKeybinding: newKeybinding,
+        });
+        SettingsStore.setValue(this.props.settingName, null, SettingLevel.ACCOUNT, newKeybinding);
     }
 
     onRemoveKeybinding = (ev) => {
