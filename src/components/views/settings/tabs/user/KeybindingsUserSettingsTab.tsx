@@ -147,7 +147,7 @@ export default class KeybindingsUserSettingsTab extends React.Component {
 
         return (
             <div className="mx_SettingsTab mx_KeybindingUserSettingsTab">
-                <div className="mx_SettingsTab_heading">{_t("Customize your keybindings")}</div>
+                <div className="mx_SettingsTab_heading">{_t("Keybindings")}</div>
                 {sections}
             </div>
         );
