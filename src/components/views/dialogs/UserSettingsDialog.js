@@ -112,7 +112,7 @@ export default class UserSettingsDialog extends React.Component {
         tabs.push(new Tab(
             USER_KEYBINDINGS_TAB,
             _td("Keybindings"),
-            "mx_UserSettingsDialog_preferencesIcon",
+            "mx_UserSettingsDialog_keyboardIcon",
             <KeybindingsUserSettingsTab />,
         ));
 
