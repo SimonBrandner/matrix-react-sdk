@@ -30,7 +30,8 @@ interface KeybindingIProps {
 }
 interface KeybindingIState {
     currentKeybinding: IKeybind;
-    showDefaultKeybindings: boolean,
+    defaultKeybinding: IKeybind;
+    showDefaultKeybindings: boolean;
 }
 
 // TODO: Handle conflicts
@@ -39,12 +40,14 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
         super(props);
 
         const showDefaultKeybindings = !SettingsStore.getValue("feature_keybinds");
+        const defaultKeybinding = SettingsStore.getDefaultValue(this.props.settingName);
 
         this.state = {
             showDefaultKeybindings: showDefaultKeybindings,
             currentKeybinding: showDefaultKeybindings ?
-                SettingsStore.getDefaultValue(this.props.settingName) :
+                defaultKeybinding :
                 SettingsStore.getValue(this.props.settingName),
+            defaultKeybinding: defaultKeybinding,
         };
     }
 
@@ -56,10 +59,11 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
         SettingsStore.setValue(this.props.settingName, null, SettingLevel.ACCOUNT, newKeybinding);
     }
 
-    onRemoveKeybinding = (ev) => {
+    onResetKeybinding = () => {
         this.setState({
-            currentKeybinding: null,
+            currentKeybinding: this.state.defaultKeybinding,
         });
+        SettingsStore.setValue(this.props.settingName, null, SettingLevel.ACCOUNT, null);
     }
 
     showKeybindingDialog = (ev) => {
@@ -71,28 +75,30 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
     render() {
         const label = SettingsStore.getDisplayName(this.props.settingName);
         const value = this.state.currentKeybinding;
+        const defaultValue = this.state.defaultKeybinding;
 
         let buttons;
         if (this.state.showDefaultKeybindings) {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
                 <Shortcut keybind={value}></Shortcut>
             </div>;
-        } else if (value) {
+        } else if (value != defaultValue) {
+            buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
+                <Shortcut keybind={value}></Shortcut>
+                <AccessibleButton kind="danger" onClick={this.onResetKeybinding}>
+                    {_t("Reset")}
+                </AccessibleButton>
+                <AccessibleButton kind="primary" onClick={this.showKeybindingDialog}>
+                    {_t("Edit")}
+                </AccessibleButton>
+            </div>;
+        } else {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
                 <Shortcut keybind={value}></Shortcut>
                 <AccessibleButton kind="primary" onClick={this.showKeybindingDialog}>
                     {_t("Edit")}
                 </AccessibleButton>
-                <AccessibleButton kind="danger" onClick={this.onRemoveKeybinding}>
-                    {_t("Remove")}
-                </AccessibleButton>
             </div>;
-        } else {
-            buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
-                <AccessibleButton kind="primary" onClick={this.showKeybindingDialog}>
-                    {_t("Add")}
-                </AccessibleButton>
-            </div>
         }
 
         return (
