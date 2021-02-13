@@ -30,6 +30,7 @@ interface KeybindingIProps {
 }
 interface KeybindingIState {
     currentKeybinding: IKeybind;
+    showDefaultKeybindings: boolean,
 }
 
 // TODO: Handle conflicts
@@ -37,8 +38,13 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
     constructor(props: KeybindingIProps) {
         super(props);
 
+        const showDefaultKeybindings = !SettingsStore.getValue("feature_keybinds");
+
         this.state = {
-            currentKeybinding: SettingsStore.getValue(this.props.settingName),
+            showDefaultKeybindings: showDefaultKeybindings,
+            currentKeybinding: showDefaultKeybindings ?
+                SettingsStore.getDefaultValue(this.props.settingName) :
+                SettingsStore.getValue(this.props.settingName),
         };
     }
 
@@ -67,7 +73,11 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
         const value = this.state.currentKeybinding;
 
         let buttons;
-        if (value) {
+        if (this.state.showDefaultKeybindings) {
+            buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
+                <Shortcut keybind={value}></Shortcut>
+            </div>;
+        } else if (value) {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
                 <Shortcut keybind={value}></Shortcut>
                 <AccessibleButton kind="primary" onClick={this.showKeybindingDialog}>
