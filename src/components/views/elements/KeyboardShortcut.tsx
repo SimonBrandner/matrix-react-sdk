@@ -16,9 +16,9 @@ limitations under the License.
 
 import * as React from "react";
 import { _td } from "../../../languageHandler";
-import {KeyCombo, isMac, Key, Modifier} from "../../../Keyboard";
+import {KeyCombo, isMac, Key} from "../../../Keyboard";
 
-const alternateKeyName: Record<string, string> = {
+const keyName: Record<string, string> = {
     [Key.PAGE_UP]: _td("Page Up"),
     [Key.PAGE_DOWN]: _td("Page Down"),
     [Key.ESCAPE]: _td("Esc"),
@@ -26,23 +26,30 @@ const alternateKeyName: Record<string, string> = {
     [Key.SPACE]: _td("Space"),
     [Key.HOME]: _td("Home"),
     [Key.END]: _td("End"),
+    [Key.ALT]: _td("Alt"),
+    [Key.CONTROL]: _td("Ctrl"),
+    [Key.SHIFT]: _td("Shift"),
 };
-
-const alternateModifierName: Record<string, string> = {
-    [Modifier.ALT]: _td("Alt"),
-    [Modifier.CONTROL]: _td("Ctrl"),
-    [Modifier.SHIFT]: _td("Shift"),
-}
 
 const keyIcon: Record<string, string> = {
     [Key.ARROW_UP]: "↑",
     [Key.ARROW_DOWN]: "↓",
     [Key.ARROW_LEFT]: "←",
     [Key.ARROW_RIGHT]: "→",
+
 };
+
+if (isMac) {
+    keyIcon[Key.META] = "⌘";
+    keyIcon[Key.SHIFT] = "⌥";
+}
 
 interface IProps {
     keyCombo: KeyCombo;
+}
+
+function keyDisplayValue(key: Key) {
+    return keyIcon[key] || keyName[key] || key;
 }
 
 export default class Shortcut extends React.Component<IProps> {
@@ -53,26 +60,29 @@ export default class Shortcut extends React.Component<IProps> {
         if (this.props.keyCombo.ctrlOrCmdKey) {
             modifiersElement.push(
                 <React.Fragment>
-                    <kbd>{ isMac ? "⌘" : alternateModifierName[Modifier.CONTROL] }</kbd>+
+                    <kbd>{ isMac ? keyDisplayValue(Key.META) : keyDisplayValue(Key.CONTROL) }</kbd>+
                 </React.Fragment>,
             );
         }
         if (this.props.keyCombo.altKey) {
             modifiersElement.push(
                 <React.Fragment>
-                    <kbd>{ isMac ? "⌥" : alternateModifierName[Modifier.ALT] }</kbd>+
+                    <kbd>{ keyDisplayValue(Key.ALT) }</kbd>+
                 </React.Fragment>,
             );
         }
         if (this.props.keyCombo.shiftKey) {
             modifiersElement.push(
                 <React.Fragment>
-                    <kbd>{ alternateModifierName[Modifier.SHIFT] }</kbd>+
+                    <kbd>{ keyDisplayValue(Key.SHIFT) }</kbd>+
                 </React.Fragment>,
             );
         }
 
-        const keyElement = key ? <kbd>{ keyIcon[key] || alternateKeyName[key] || key }</kbd> : null;
+        let keyElement;
+        if (key) {
+            keyElement = <kbd>{ keyDisplayValue(key) }</kbd>;
+        }
 
         return (
             <div className="mx_KeyboardShortcut">

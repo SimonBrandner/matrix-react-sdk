@@ -75,13 +75,6 @@ export enum Key {
     Z = "z",
 }
 
-export enum Modifier {
-    ALT = "Alt",
-    META = "Meta",
-    CONTROL = "Control",
-    SHIFT = "Shift",
-}
-
 export interface KeyCombo {
     key: Key;
 
@@ -106,9 +99,12 @@ export function isOnlyCtrlOrCmdIgnoreShiftKeyEvent(ev) {
     }
 }
 
+// TODO: convert into isKeyCombo
 export function isModifier(key: Key): boolean {
-    for (const modifier of Object.values(Modifier)) {
-        if (key.toString() == modifier.toString()) return true;
+    const modifiers = ["Control", "Meta", "Shift", "Alt"];
+    if (modifiers.includes(key)) {
+        return true;
+    } else {
+        return false;
     }
-    return false;
 }
