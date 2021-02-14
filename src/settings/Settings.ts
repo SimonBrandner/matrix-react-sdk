@@ -716,7 +716,14 @@ export const SETTINGS: {[setting: string]: ISetting} = {
         default: {
             key: Key.ARROW_UP,
         },
-        displayName: _td("Navigate to next messages to edit"),
+        displayName: _td("Navigate to next message to edit"),
+    },
+    "Keybind.Composer.editPrevious": {
+        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
+        default: {
+            key: Key.ARROW_DOWN,
+        },
+        displayName: _td("Navigate to previous message to edit"),
     },
     "Keybind.Composer.jumpToStart": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
@@ -738,7 +745,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
             altKey: true,
-            ctrlKey: true,
+            ctrlOrCmdKey: true,
             key: Key.ARROW_UP,
         },
         displayName: _td("Navigate to next message in composer history"),
@@ -747,17 +754,10 @@ export const SETTINGS: {[setting: string]: ISetting} = {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
             altKey: true,
-            ctrlKey: true,
+            ctrlOrCmdKey: true,
             key: Key.ARROW_DOWN,
         },
         displayName: _td("Navigate to previous message in composer history"),
-    },
-    "Keybind.Composer.editPrevious": {
-        supportedLevels: LEVELS_ACCOUNT_SETTINGS,
-        default: {
-             key: Key.ARROW_DOWN,
-        },
-        displayName: _td("Navigate to next previous to edit"),
     },
     "Keybind.Calls.toggleMic": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
@@ -817,7 +817,6 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Room.scrollDown": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            ctrlOrCmdKey: true,
             key: Key.PAGE_DOWN,
         },
         displayName: _td("Scroll down in the timeline"),
