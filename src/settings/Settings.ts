@@ -32,7 +32,7 @@ import UseSystemFontController from './controllers/UseSystemFontController';
 import { SettingLevel } from "./SettingLevel";
 import SettingController from "./controllers/SettingController";
 import { RightPanelPhases } from "../stores/RightPanelStorePhases";
-import { isMac, Key, Modifiers, CMD_OR_CTRL } from "../Keyboard";
+import { isMac, Key } from "../Keyboard";
 import UIFeatureController from "./controllers/UIFeatureController";
 import { UIFeature } from "./UIFeature";
 import { OrderedMultiController } from "./controllers/OrderedMultiController";
@@ -675,7 +675,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.toggleBold": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.B,
         },
         displayName: _td("Toggle Bold"),
@@ -683,7 +683,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.toggleItalics": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.I,
         },
         displayName: _td("Toggle Italics"),
@@ -691,7 +691,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.toggleQuote": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.GREATER_THAN,
         },
         displayName: _td("Toggle Quote"),
@@ -699,7 +699,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.newLine": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.SHIFT],
+            shiftKey: true,
             key: Key.ENTER,
         },
         displayName: _td("New line"),
@@ -721,7 +721,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.jumpToStart": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.HOME,
         },
         displayName: _td("Jump to start of the composer"),
@@ -729,7 +729,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.jumpToEnd": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.END,
         },
         displayName: _td("Jump to end of the composer"),
@@ -737,7 +737,8 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.nextMessageInHistory": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.CONTROL, Modifiers.ALT],
+            altKey: true,
+            ctrlKey: true,
             key: Key.ARROW_UP,
         },
         displayName: _td("Navigate to next message in composer history"),
@@ -745,7 +746,8 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Composer.previousMessageInHistory": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.CONTROL, Modifiers.ALT],
+            altKey: true,
+            ctrlKey: true,
             key: Key.ARROW_DOWN,
         },
         displayName: _td("Navigate to previous message in composer history"),
@@ -760,7 +762,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Calls.toggleMic": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.D,
         },
         displayName: _td("Toggle microphone mute"),
@@ -768,7 +770,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Calls.toggleWebcam": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.E,
         },
         displayName: _td("Toggle webcam on/off"),
@@ -783,7 +785,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Room.jumpToOldestUnreadMessage": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.SHIFT],
+            shiftKey: true,
             key: Key.PAGE_UP,
         },
         displayName: _td("Jump to oldest unread message"),
@@ -791,7 +793,8 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Room.uploadFile": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL, Modifiers.SHIFT],
+            ctrlOrCmdKey: true,
+            shiftKey: true,
             key: Key.U,
         },
         displayName: _td("Upload a file"),
@@ -799,7 +802,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Room.search": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.F,
         },
         displayName: _td("Search (must be enabled)"),
@@ -814,7 +817,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Room.scrollDown": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.PAGE_DOWN,
         },
         displayName: _td("Scroll down in the timeline"),
@@ -822,7 +825,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.RoomList.jumpToRoomSearch": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.K,
         },
         displayName: _td("Jump to room search"),
@@ -872,7 +875,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.toggleTopLeftMenu": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.BACKTICK,
         },
         displayName: _td("Toggle the top left menu"),
@@ -894,7 +897,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.toggleRightPanel": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.PERIOD,
         },
         displayName: _td("Toggle right panel"),
@@ -902,7 +905,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.showKeybindingSettings": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL],
+            ctrlOrCmdKey: true,
             key: Key.SLASH,
         },
         displayName: _td("Show keybinding settings"),
@@ -910,7 +913,8 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.goToHome": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [CMD_OR_CTRL, Modifiers.ALT],
+            ctrlOrCmdKey: true,
+            altKey: true,
             key: Key.H,
         },
         displayName: _td("Go to Home View"),
@@ -918,7 +922,8 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.nextUnreadRoom": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.ALT, Modifiers.SHIFT],
+            shiftKey: true,
+            altKey: true,
             key: Key.ARROW_UP,
         },
         displayName: _td("Next unread room or DM"),
@@ -926,7 +931,8 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.previousUnreadRoom": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.ALT, Modifiers.SHIFT],
+            shiftKey: true,
+            altKey: true,
             key: Key.ARROW_DOWN,
         },
         displayName: _td("Previous unread room or DM"),
@@ -934,7 +940,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.nextRoom": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.ALT],
+            altKey: true,
             key: Key.ARROW_UP,
         },
         displayName: _td("Next room or DM"),
@@ -942,7 +948,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
     "Keybind.Navigation.previousRoom": {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
-            modifiers: [Modifiers.ALT],
+            altKey: true,
             key: Key.ARROW_DOWN,
         },
         displayName: _td("Previous room or DM"),

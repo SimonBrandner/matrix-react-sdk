@@ -15,17 +15,17 @@ limitations under the License.
 */
 
 import React from 'react';
-import { Key, IKeybind, Modifiers, isModifier } from '../../../../Keyboard';
+import {KeyCombo, isModifier} from '../../../../Keyboard';
 import {_t} from "../../../../languageHandler";
 import BaseDialog from "../../dialogs/BaseDialog"
 import KeyboardShortcut from "../../elements/KeyboardShortcut"
 
 interface IState {
-    currentKeybinding: IKeybind;
+    currentKeyCombo: KeyCombo;
 }
 
 interface IProps {
-    onFinished: (newKeybinding: IKeybind | null) => void;
+    onFinished: (newKeybinding: KeyCombo | null) => void;
 }
 
 export default class KeybindingDialog extends React.Component<IProps, IState> {
@@ -33,13 +33,14 @@ export default class KeybindingDialog extends React.Component<IProps, IState> {
         super(props);
 
         this.state = {
-            currentKeybinding: null,
+            currentKeyCombo: null,
         }
     }
 
-    keys: Array<IKeybind> = [];
+    keys: Array<KeyCombo> = [];
     timeout;
 
+    // TODO What if only a key is pressed
     onKeyDown = (ev) => {
         ev.preventDefault();
         ev.stopPropagation();
@@ -48,41 +49,37 @@ export default class KeybindingDialog extends React.Component<IProps, IState> {
         const key = ev.key;
         this.keys.push(key);
 
-        // TODO: Handle other modifiers like ALT_GR
-        const modifiers = [];
-        if (ev.altKey) modifiers.push(Modifiers.ALT);
-        if (ev.shiftKey) modifiers.push(Modifiers.SHIFT);
-        if (ev.metaKey) modifiers.push(Modifiers.SUPER);
-        if (ev.ctrlKey) modifiers.push(Modifiers.CONTROL);
-
-        const keybind: IKeybind = {
+        const keyCombo: KeyCombo = {
             key: key,
-            modifiers: modifiers,
         }
 
-        if (isModifier(keybind)) {
-            keybind.key = null;
+        if (ev.altKey) keyCombo.altKey = true;
+        if (ev.shiftKey) keyCombo.shiftKey = true;
+        if (ev.metaKey || ev.ctrlKey) keyCombo.ctrlOrCmdKey = true;
+
+        if (isModifier(key)) {
+            keyCombo.key = null;
         }
 
         this.setState({
-            currentKeybinding: keybind,
+            currentKeyCombo: keyCombo,
         });
     }
 
     onKeyUp = (ev) => {
         this.keys.splice(this.keys.indexOf(ev.key), 1);
         if (this.keys.length > 0) return;
-        if (isModifier(this.state.currentKeybinding)) return;
+        if (!this.state.currentKeyCombo.key) return;
 
         this.timeout = setTimeout(() => {
-            this.props.onFinished(this.state.currentKeybinding);
+            this.props.onFinished(this.state.currentKeyCombo);
         }, 500);
     }
 
     render() {
         const keyboardShortcut =
-            this.state.currentKeybinding ?
-                <KeyboardShortcut keybind={this.state.currentKeybinding} ></KeyboardShortcut> : null;
+            this.state.currentKeyCombo ?
+                <KeyboardShortcut keyCombo={this.state.currentKeyCombo} ></KeyboardShortcut> : null;
 
         return (
             <BaseDialog

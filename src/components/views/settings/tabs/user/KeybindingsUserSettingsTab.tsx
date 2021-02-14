@@ -23,14 +23,14 @@ import {SETTINGS} from "../../../../../settings/Settings"
 import {SettingLevel} from "../../../../../settings/SettingLevel";
 import SettingsStore from '../../../../../settings/SettingsStore';
 import Shortcut from '../../../elements/KeyboardShortcut';
-import {IKeybind} from '../../../../../Keyboard';
+import {KeyCombo} from '../../../../../Keyboard';
 
 interface KeybindingIProps {
     settingName: string;
 }
 interface KeybindingIState {
-    currentKeybinding: IKeybind;
-    defaultKeybinding: IKeybind;
+    currentKeyCombo: KeyCombo;
+    defaultKeyCombo: KeyCombo;
     showDefaultKeybindings: boolean;
 }
 
@@ -44,24 +44,24 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
 
         this.state = {
             showDefaultKeybindings: showDefaultKeybindings,
-            currentKeybinding: showDefaultKeybindings ?
+            currentKeyCombo: showDefaultKeybindings ?
                 defaultKeybinding :
                 SettingsStore.getValue(this.props.settingName),
-            defaultKeybinding: defaultKeybinding,
+            defaultKeyCombo: defaultKeybinding,
         };
     }
 
-    onSetKeybinding = (newKeybinding: IKeybind) => {
-        if (newKeybinding == null) return;
+    onSetKeybinding = (newKeyCombo: KeyCombo) => {
+        if (newKeyCombo == null) return;
         this.setState({
-            currentKeybinding: newKeybinding,
+            currentKeyCombo: newKeyCombo,
         });
-        SettingsStore.setValue(this.props.settingName, null, SettingLevel.ACCOUNT, newKeybinding);
+        SettingsStore.setValue(this.props.settingName, null, SettingLevel.ACCOUNT, newKeyCombo);
     }
 
     onResetKeybinding = () => {
         this.setState({
-            currentKeybinding: this.state.defaultKeybinding,
+            currentKeyCombo: this.state.defaultKeyCombo,
         });
         SettingsStore.setValue(this.props.settingName, null, SettingLevel.ACCOUNT, null);
     }
@@ -74,17 +74,17 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
 
     render() {
         const label = SettingsStore.getDisplayName(this.props.settingName);
-        const value = this.state.currentKeybinding;
-        const defaultValue = this.state.defaultKeybinding;
+        const value = this.state.currentKeyCombo;
+        const defaultValue = this.state.defaultKeyCombo;
 
         let buttons;
         if (this.state.showDefaultKeybindings) {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
-                <Shortcut keybind={value}></Shortcut>
+                <Shortcut keyCombo={value}></Shortcut>
             </div>;
         } else if (value != defaultValue) {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
-                <Shortcut keybind={value}></Shortcut>
+                <Shortcut keyCombo={value}></Shortcut>
                 <AccessibleButton kind="danger" onClick={this.onResetKeybinding}>
                     {_t("Reset")}
                 </AccessibleButton>
@@ -94,7 +94,7 @@ export class Keybinding extends React.Component<KeybindingIProps, KeybindingISta
             </div>;
         } else {
             buttons = <div className="mx_KeybindingUserSettingsTab_keybind_buttons">
-                <Shortcut keybind={value}></Shortcut>
+                <Shortcut keyCombo={value}></Shortcut>
                 <AccessibleButton kind="primary" onClick={this.showKeybindingDialog}>
                     {_t("Edit")}
                 </AccessibleButton>

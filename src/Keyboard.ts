@@ -16,6 +16,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+export const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+
 export enum Key {
     HOME = "Home",
     END = "End",
@@ -73,24 +75,19 @@ export enum Key {
     Z = "z",
 }
 
-export enum Modifiers {
-    ALT = "Alt", // Option on Mac and displayed as an Icon
-    ALT_GR = "Alt Gr",
-    SHIFT = "Shift",
-    SUPER = "Super", // should this be "Windows"?
-    // Instead of using below, consider CMD_OR_CTRL
-    COMMAND = "Command", // This gets displayed as an Icon
+export enum Modifier {
+    ALT = "Alt",
+    META = "Meta",
     CONTROL = "Control",
+    SHIFT = "Shift",
 }
 
-export const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-
-// Meta-modifier: isMac ? CMD : CONTROL
-export const CMD_OR_CTRL = isMac ? Modifiers.COMMAND : Modifiers.CONTROL;
-
-export interface IKeybind {
-    modifiers?: Modifiers[];
+export interface KeyCombo {
     key: Key;
+
+    ctrlOrCmdKey?: boolean;
+    altKey?: boolean;
+    shiftKey?: boolean;
 }
 
 export function isOnlyCtrlOrCmdKeyEvent(ev) {
@@ -109,12 +106,9 @@ export function isOnlyCtrlOrCmdIgnoreShiftKeyEvent(ev) {
     }
 }
 
-export function isModifier(keybind: IKeybind): boolean {
-    console.log(keybind);
-    if (!keybind.modifiers) return false;
-    if (!keybind.key) return true;
-    for (const modifier of keybind.modifiers) {
-        if (keybind.key.toString() === modifier.toString()) return true;
+export function isModifier(key: Key): boolean {
+    for (const modifier of Object.values(Modifier)) {
+        if (key.toString() == modifier.toString()) return true;
     }
     return false;
 }

@@ -16,7 +16,7 @@ limitations under the License.
 
 import * as React from "react";
 import { _td } from "../../../languageHandler";
-import {IKeybind, isMac, Key, Modifiers} from "../../../Keyboard";
+import {KeyCombo, isMac, Key, Modifier} from "../../../Keyboard";
 
 const alternateKeyName: Record<string, string> = {
     [Key.PAGE_UP]: _td("Page Up"),
@@ -29,11 +29,9 @@ const alternateKeyName: Record<string, string> = {
 };
 
 const alternateModifierName: Record<string, string> = {
-    [Modifiers.ALT]: _td("Alt"),
-    [Modifiers.ALT_GR]: _td("Alt Gr"),
-    [Modifiers.SHIFT]: _td("Shift"),
-    [Modifiers.SUPER]: _td("Super"),
-    [Modifiers.CONTROL]: _td("Ctrl"),
+    [Modifier.ALT]: _td("Alt"),
+    [Modifier.CONTROL]: _td("Ctrl"),
+    [Modifier.SHIFT]: _td("Shift"),
 }
 
 const keyIcon: Record<string, string> = {
@@ -43,30 +41,37 @@ const keyIcon: Record<string, string> = {
     [Key.ARROW_RIGHT]: "→",
 };
 
-const modifierIcon: Record<string, string> = {
-    [Modifiers.COMMAND]: "⌘",
-};
-
-if (isMac) {
-    modifierIcon[Modifiers.ALT] = "⌥";
-}
-
 interface IProps {
-    keybind: IKeybind;
+    keyCombo: KeyCombo;
 }
 
 export default class Shortcut extends React.Component<IProps> {
     render() {
-        const key = this.props.keybind.key;
-        const modifiers = this.props.keybind.modifiers;
+        const key = this.props.keyCombo.key;
 
-        const modifiersElement = modifiers?.map((modifier) => {
-            return (
-                <React.Fragment key={modifier}>
-                    <kbd>{ modifierIcon[modifier] || alternateModifierName[modifier] || modifier }</kbd>+
-                </React.Fragment>
+        const modifiersElement = [];
+        if (this.props.keyCombo.ctrlOrCmdKey) {
+            modifiersElement.push(
+                <React.Fragment>
+                    <kbd>{ isMac ? "⌘" : alternateModifierName[Modifier.CONTROL] }</kbd>+
+                </React.Fragment>,
             );
-        });
+        }
+        if (this.props.keyCombo.altKey) {
+            modifiersElement.push(
+                <React.Fragment>
+                    <kbd>{ isMac ? "⌥" : alternateModifierName[Modifier.ALT] }</kbd>+
+                </React.Fragment>,
+            );
+        }
+        if (this.props.keyCombo.shiftKey) {
+            modifiersElement.push(
+                <React.Fragment>
+                    <kbd>{ alternateModifierName[Modifier.SHIFT] }</kbd>+
+                </React.Fragment>,
+            );
+        }
+
         const keyElement = key ? <kbd>{ keyIcon[key] || alternateKeyName[key] || key }</kbd> : null;
 
         return (
