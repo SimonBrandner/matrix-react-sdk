@@ -75,7 +75,9 @@ export enum Key {
     Z = "z",
 }
 
-export interface KeyCombo {
+/** An array of modifiers */
+export const Modifiers = ["Control", "Meta", "Shift", "Alt"];
+
     key: Key;
 
     ctrlOrCmdKey?: boolean;

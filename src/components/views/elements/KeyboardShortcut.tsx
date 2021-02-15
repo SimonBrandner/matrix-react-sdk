@@ -16,7 +16,7 @@ limitations under the License.
 
 import * as React from "react";
 import { _td } from "../../../languageHandler";
-import {KeyCombo, isMac, Key} from "../../../Keyboard";
+import {KeyCombo, isMac, Key, Modifiers} from "../../../Keyboard";
 
 const keyName: Record<string, string> = {
     [Key.PAGE_UP]: _td("Page Up"),
@@ -80,7 +80,7 @@ export default class Shortcut extends React.Component<IProps> {
         }
 
         let keyElement;
-        if (key) {
+        if (key && !Modifiers.includes(key)) {
             keyElement = <kbd>{ keyDisplayValue(key) }</kbd>;
         }
 
