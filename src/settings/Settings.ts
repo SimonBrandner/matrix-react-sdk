@@ -745,7 +745,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
             altKey: true,
-            ctrlOrCmdKey: true,
+            ctrlKey: true,
             key: Key.ARROW_UP,
         },
         displayName: _td("Navigate to next message in composer history"),
@@ -754,7 +754,7 @@ export const SETTINGS: {[setting: string]: ISetting} = {
         supportedLevels: LEVELS_ACCOUNT_SETTINGS,
         default: {
             altKey: true,
-            ctrlOrCmdKey: true,
+            ctrlKey: true,
             key: Key.ARROW_DOWN,
         },
         displayName: _td("Navigate to previous message in composer history"),

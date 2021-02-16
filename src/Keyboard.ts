@@ -18,6 +18,7 @@ limitations under the License.
 
 export const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
+/** An enum of keys */
 export enum Key {
     HOME = "Home",
     END = "End",
@@ -78,11 +79,69 @@ export enum Key {
 /** An array of modifiers */
 export const Modifiers = ["Control", "Meta", "Shift", "Alt"];
 
+/**
+ * Represents a key combination
+ */
+export interface IKeyCombo {
     key: Key;
-
-    ctrlOrCmdKey?: boolean;
     altKey?: boolean;
     shiftKey?: boolean;
+    // It's preferable to use this over ctrlKey and cmdKey
+    ctrlOrCmdKey?: boolean;
+    // These shouldn't be used since they will work only
+    // on one platform. They are here for legacy purposes.
+    ctrlKey?: boolean;
+    metaKey?: boolean;
+}
+
+/**
+ * A class that represents a key combination,
+ * that has some useful methods
+ */
+export class KeyCombo implements IKeyCombo {
+    key: Key;
+    altKey?: boolean;
+    shiftKey?: boolean;
+    // It's preferable to use this over ctrlKey and cmdKey
+    ctrlOrCmdKey?: boolean;
+    // These shouldn't be used since they will work only
+    // on one platform. They are here for legacy purposes.
+    ctrlKey?: boolean;
+    metaKey?: boolean;
+
+    /**
+     * Creates a keyCombo
+     * @param {KeyboardEvent} ev The event from which
+     * to create the keyCombo
+     */
+    constructor(keyCombo: IKeyCombo);
+    constructor(ev: KeyboardEvent);
+    constructor(input: any) {
+        this.key = input.key as Key;
+
+        if (input.altKey) this.altKey = true;
+        if (input.shiftKey) this.shiftKey = true;
+        if (input.metaKey || input.ctrlKey) this.ctrlOrCmdKey = true;
+    }
+
+    /**
+     * Tests if a keyCombo has both a modifier and a key
+     * @param {KeyCombo} keyCombo the keyCombo to test
+     * @returns {boolean} True if the keyCombo has a
+     * modifier and a key
+     */
+    isTrueKeyCombo(): boolean {
+        if (!this.key) return false;
+        if (Modifiers.includes(this.key)) return false;
+        if (!(
+            this.altKey ||
+            this.shiftKey ||
+            this.ctrlOrCmdKey ||
+            this.ctrlKey ||
+            this.metaKey
+        )) return false;
+        return true;
+    }
 }
 
 export function isOnlyCtrlOrCmdKeyEvent(ev) {
@@ -98,15 +157,5 @@ export function isOnlyCtrlOrCmdIgnoreShiftKeyEvent(ev) {
         return ev.metaKey && !ev.altKey && !ev.ctrlKey;
     } else {
         return ev.ctrlKey && !ev.altKey && !ev.metaKey;
-    }
-}
-
-// TODO: convert into isKeyCombo
-export function isModifier(key: Key): boolean {
-    const modifiers = ["Control", "Meta", "Shift", "Alt"];
-    if (modifiers.includes(key)) {
-        return true;
-    } else {
-        return false;
     }
 }

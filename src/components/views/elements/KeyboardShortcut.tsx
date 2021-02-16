@@ -63,6 +63,18 @@ export default class Shortcut extends React.Component<IProps> {
                     <kbd>{ isMac ? keyDisplayValue(Key.META) : keyDisplayValue(Key.CONTROL) }</kbd>+
                 </React.Fragment>,
             );
+        } else if (this.props.keyCombo.ctrlKey) {
+            modifiersElement.push(
+                <React.Fragment>
+                    <kbd>{ keyDisplayValue(Key.CONTROL) }</kbd>+
+                </React.Fragment>,
+            );
+        } else if (this.props.keyCombo.metaKey) {
+            modifiersElement.push(
+                <React.Fragment>
+                    <kbd>{ keyDisplayValue(Key.META) }</kbd>+
+                </React.Fragment>,
+            );
         }
         if (this.props.keyCombo.altKey) {
             modifiersElement.push(

@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 import React from 'react';
-import {KeyCombo, isModifier} from '../../../../Keyboard';
+import {KeyCombo} from '../../../../Keyboard';
 import {_t} from "../../../../languageHandler";
 import BaseDialog from "../../dialogs/BaseDialog"
 import KeyboardShortcut from "../../elements/KeyboardShortcut"
@@ -45,31 +45,17 @@ export default class KeybindingDialog extends React.Component<IProps, IState> {
         ev.preventDefault();
         ev.stopPropagation();
         clearTimeout(this.timeout);
-
-        const key = ev.key;
-        this.keys.push(key);
-
-        const keyCombo: KeyCombo = {
-            key: key,
-        }
-
-        if (ev.altKey) keyCombo.altKey = true;
-        if (ev.shiftKey) keyCombo.shiftKey = true;
-        if (ev.metaKey || ev.ctrlKey) keyCombo.ctrlOrCmdKey = true;
-
-        if (isModifier(key)) {
-            keyCombo.key = null;
-        }
+        this.keys.push(ev.key);
 
         this.setState({
-            currentKeyCombo: keyCombo,
+            currentKeyCombo: new KeyCombo(ev),
         });
     }
 
     onKeyUp = (ev) => {
         this.keys.splice(this.keys.indexOf(ev.key), 1);
         if (this.keys.length > 0) return;
-        if (!this.state.currentKeyCombo.key) return;
+        if (!this.state.currentKeyCombo.isTrueKeyCombo()) return;
 
         this.timeout = setTimeout(() => {
             this.props.onFinished(this.state.currentKeyCombo);
