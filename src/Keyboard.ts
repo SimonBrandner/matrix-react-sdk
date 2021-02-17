@@ -86,11 +86,17 @@ export interface IKeyCombo {
     key: Key;
     altKey?: boolean;
     shiftKey?: boolean;
-    // It's preferable to use this over ctrlKey and metaKey
+    /*
+     * It's preferable to use this over ctrlKey and metaKey
+     */
     ctrlOrCmdKey?: boolean;
-    // These shouldn't be used since they will work only
-    // on one platform. They are here for legacy purposes.
+    /** This shouldn't be used since it will work only
+     * on one platform. They are here for legacy purposes.
+     */
     ctrlKey?: boolean;
+    /** This shouldn't be used since it will work only
+     * on one platform. They are here for legacy purposes.
+     */
     metaKey?: boolean;
 }
 
@@ -102,11 +108,17 @@ export class KeyCombo implements IKeyCombo {
     key: Key;
     altKey?: boolean;
     shiftKey?: boolean;
-    // It's preferable to use this over ctrlKey and metaKey
+    /*
+     * It's preferable to use this over ctrlKey and metaKey
+     */
     ctrlOrCmdKey?: boolean;
-    // These shouldn't be used since they will work only
-    // on one platform. They are here for legacy purposes.
+    /** This shouldn't be used since it will work only
+     * on one platform. They are here for legacy purposes.
+     */
     ctrlKey?: boolean;
+    /** This shouldn't be used since it will work only
+     * on one platform. They are here for legacy purposes.
+     */
     metaKey?: boolean;
 
     /**
