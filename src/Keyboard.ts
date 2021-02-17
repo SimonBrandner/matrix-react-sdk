@@ -123,12 +123,10 @@ export class KeyCombo implements IKeyCombo {
 
     /**
      * Creates a keyCombo
-     * @param {KeyboardEvent} ev The event from which
-     * to create the keyCombo
+     * @param {KeyboardEvent|IKeyCombo} input
+     * The input from which to create the keyCombo
      */
-    constructor(keyCombo: IKeyCombo);
-    constructor(ev: KeyboardEvent);
-    constructor(input: any) {
+    constructor(input: KeyboardEvent | IKeyCombo) {
         this.key = input.key as Key;
 
         if (input.altKey) this.altKey = true;
