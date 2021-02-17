@@ -15,13 +15,13 @@ limitations under the License.
 */
 
 import React from 'react';
-import {KeyCombo} from '../../../../Keyboard';
+import {KeyCombo, parseKeyCombo} from '../../../../Keyboard';
 import {_t} from "../../../../languageHandler";
 import BaseDialog from "../../dialogs/BaseDialog"
 import KeyboardShortcut from "../../elements/KeyboardShortcut"
 
 interface IState {
-    currentKeyCombo: KeyCombo;
+    currentKeyCombo: KeyboardEvent;
 }
 
 interface IProps {
@@ -44,21 +44,23 @@ export default class KeybindingDialog extends React.Component<IProps, IState> {
     onKeyDown = (ev) => {
         ev.preventDefault();
         ev.stopPropagation();
+        ev.persist();
         clearTimeout(this.timeout);
         this.keys.push(ev.key);
 
         this.setState({
-            currentKeyCombo: new KeyCombo(ev),
+            currentKeyCombo: ev,
         });
     }
 
     onKeyUp = (ev) => {
         this.keys.splice(this.keys.indexOf(ev.key), 1);
         if (this.keys.length > 0) return;
-        if (!this.state.currentKeyCombo.isTrueKeyCombo()) return;
+        const keyCombo = parseKeyCombo(this.state.currentKeyCombo);
+        if (!keyCombo) return;
 
         this.timeout = setTimeout(() => {
-            this.props.onFinished(this.state.currentKeyCombo);
+            this.props.onFinished(keyCombo);
         }, 500);
     }
 

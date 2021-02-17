@@ -16,7 +16,7 @@ limitations under the License.
 
 import * as React from "react";
 import { _td } from "../../../languageHandler";
-import {KeyCombo, isMac, Key, Modifiers} from "../../../Keyboard";
+import {isMac, Key, KeyCombo, Modifiers} from "../../../Keyboard";
 
 const keyName: Record<string, string> = {
     [Key.PAGE_UP]: _td("Page Up"),
@@ -45,10 +45,10 @@ if (isMac) {
 }
 
 interface IProps {
-    keyCombo: KeyCombo;
+    keyCombo: KeyCombo | KeyboardEvent;
 }
 
-function keyDisplayValue(key: Key) {
+function keyDisplayValue(key: Key | string) {
     return keyIcon[key] || keyName[key] || key;
 }
 
@@ -57,7 +57,7 @@ export default class Shortcut extends React.Component<IProps> {
         const key = this.props.keyCombo.key;
 
         const modifiersElement = [];
-        if (this.props.keyCombo.ctrlOrCmdKey) {
+        if (this.props.keyCombo.hasOwnProperty("ctrlOrCmdKey")) {
             modifiersElement.push(
                 <React.Fragment>
                     <kbd>{ isMac ? keyDisplayValue(Key.META) : keyDisplayValue(Key.CONTROL) }</kbd>+
