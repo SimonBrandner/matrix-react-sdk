@@ -57,6 +57,7 @@ export default class Shortcut extends React.Component<IProps> {
         const key = this.props.keyCombo.key;
 
         const modifiersElement = [];
+        // We have to use hasOwnProperty here, see https://stackoverflow.com/a/43496627/10822785
         if (this.props.keyCombo.hasOwnProperty("ctrlOrCmdKey")) {
             modifiersElement.push(
                 <React.Fragment key="ctrlOrCmdKey">
