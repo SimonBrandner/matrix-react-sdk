@@ -59,33 +59,33 @@ export default class Shortcut extends React.Component<IProps> {
         const modifiersElement = [];
         if (this.props.keyCombo.hasOwnProperty("ctrlOrCmdKey")) {
             modifiersElement.push(
-                <React.Fragment>
+                <React.Fragment key="ctrlOrCmdKey">
                     <kbd>{ isMac ? keyDisplayValue(Key.META) : keyDisplayValue(Key.CONTROL) }</kbd>+
                 </React.Fragment>,
             );
         } else if (this.props.keyCombo.ctrlKey) {
             modifiersElement.push(
-                <React.Fragment>
+                <React.Fragment key="ctrlKey">
                     <kbd>{ keyDisplayValue(Key.CONTROL) }</kbd>+
                 </React.Fragment>,
             );
         } else if (this.props.keyCombo.metaKey) {
             modifiersElement.push(
-                <React.Fragment>
+                <React.Fragment key="metaKey">
                     <kbd>{ keyDisplayValue(Key.META) }</kbd>+
                 </React.Fragment>,
             );
         }
         if (this.props.keyCombo.altKey) {
             modifiersElement.push(
-                <React.Fragment>
+                <React.Fragment key="altKey">
                     <kbd>{ keyDisplayValue(Key.ALT) }</kbd>+
                 </React.Fragment>,
             );
         }
         if (this.props.keyCombo.shiftKey) {
             modifiersElement.push(
-                <React.Fragment>
+                <React.Fragment key="shiftKey">
                     <kbd>{ keyDisplayValue(Key.SHIFT) }</kbd>+
                 </React.Fragment>,
             );
