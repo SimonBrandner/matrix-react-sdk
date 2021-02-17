@@ -76,7 +76,9 @@ export enum Key {
     Z = "z",
 }
 
-/** An array of modifiers */
+/**
+ * An array of modifiers
+ * */
 export const Modifiers = ["Control", "Meta", "Shift", "Alt"];
 
 /**
@@ -108,15 +110,17 @@ export class KeyCombo implements IKeyCombo {
     key: Key;
     altKey?: boolean;
     shiftKey?: boolean;
-    /*
+    /**
      * It's preferable to use this over ctrlKey and metaKey
      */
     ctrlOrCmdKey?: boolean;
-    /** This shouldn't be used since it will work only
+    /**
+     * This shouldn't be used since it will work only
      * on one platform. They are here for legacy purposes.
      */
     ctrlKey?: boolean;
-    /** This shouldn't be used since it will work only
+    /**
+     * This shouldn't be used since it will work only
      * on one platform. They are here for legacy purposes.
      */
     metaKey?: boolean;
