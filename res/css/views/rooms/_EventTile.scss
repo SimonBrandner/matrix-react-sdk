@@ -107,15 +107,6 @@ $hover-select-border: 4px;
     border-radius: 8px;
 }
 
-.mx_RoomView_timeline_rr_enabled,
-// on ELS we need the margin to allow interaction with the expand/collapse button which is normally in the RR gutter
-.mx_EventListSummary {
-    .mx_EventTile_line {
-        /* ideally should be 100px, but 95px gives us a max thumbnail size of 800x600, which is nice */
-        margin-right: 110px;
-    }
-}
-
 .mx_EventTile_bubbleContainer {
     display: grid;
     grid-template-columns: 1fr 100px;
@@ -233,7 +224,6 @@ $hover-select-border: 4px;
     float: right;
     text-align: right;
     position: relative;
-    width: 90px;
 
     /* Hack to stop the height of this pushing the messages apart.
        Replaces margin-top: -6px. This interacts better with a read

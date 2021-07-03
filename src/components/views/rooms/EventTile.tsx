@@ -164,6 +164,7 @@ export function getHandlerTile(ev) {
 }
 
 const MAX_READ_AVATARS = 5;
+const READ_MARKER_SIZE = 14;
 
 // Our component structure for EventTiles on the timeline is:
 //
@@ -423,6 +424,21 @@ export default class EventTile extends React.Component<IProps, IState> {
         return true;
     }
 
+    private msgOptionWidth(): number {
+        if (!this.props.showReadReceipts) return 0;
+        const room = MatrixClientPeg.get().getRoom(this.props.mxEvent.getRoomId());
+        const numberOfMembers = room.getMembers().length - 1;
+        return (numberOfMembers > MAX_READ_AVATARS) ? 90 : (numberOfMembers * READ_MARKER_SIZE);
+    }
+
+    private get msgOptionStyle(): React.CSSProperties {
+        return { width: `${this.msgOptionWidth}px` };
+    }
+
+    private get eventTileLineStyle(): React.CSSProperties {
+        return { marginRight: `${this.msgOptionWidth}px` };
+    }
+
     // TODO: [REACT-WARNING] Move into constructor
     // eslint-disable-next-line camelcase
     UNSAFE_componentWillMount() {
@@ -647,7 +663,12 @@ export default class EventTile extends React.Component<IProps, IState> {
 
     getReadAvatars() {
         if (this.shouldShowSentReceipt || this.shouldShowSendingReceipt) {
-            return <SentReceipt messageState={this.props.mxEvent.getAssociatedStatus()} />;
+            return (
+                <SentReceipt
+                    messageState={this.props.mxEvent.getAssociatedStatus()}
+                    msgOptionStyle={this.msgOptionStyle}
+                />
+            );
         }
 
         // return early if there are no read receipts
@@ -660,7 +681,7 @@ export default class EventTile extends React.Component<IProps, IState> {
             // lost its container).
             // See also https://github.com/vector-im/element-web/issues/17561
             return (
-                <div className="mx_EventTile_msgOption">
+                <div className="mx_EventTile_msgOption" style={this.msgOptionStyle}>
                     <span className="mx_EventTile_readAvatars" />
                 </div>
             );
@@ -724,7 +745,7 @@ export default class EventTile extends React.Component<IProps, IState> {
         }
 
         return (
-            <div className="mx_EventTile_msgOption">
+            <div className="mx_EventTile_msgOption" style={this.msgOptionStyle}>
                 <span className="mx_EventTile_readAvatars">
                     { remText }
                     { avatars }
@@ -880,7 +901,7 @@ export default class EventTile extends React.Component<IProps, IState> {
             const { mxEvent } = this.props;
             console.warn(`Event type not supported: type:${mxEvent.getType()} isState:${mxEvent.isState()}`);
             return <div className="mx_EventTile mx_EventTile_info mx_MNoticeBody">
-                <div className="mx_EventTile_line">
+                <div className="mx_EventTile_line" style={this.eventTileLineStyle}>
                     { _t('This event could not be displayed') }
                 </div>
             </div>;
@@ -1087,7 +1108,7 @@ export default class EventTile extends React.Component<IProps, IState> {
                             { timestamp }
                         </a>
                     </div>,
-                    <div className="mx_EventTile_line" key="mx_EventTile_line">
+                    <div className="mx_EventTile_line" style={this.eventTileLineStyle} key="mx_EventTile_line">
                         <EventTileType ref={this.tile}
                             mxEvent={this.props.mxEvent}
                             highlights={this.props.highlights}
@@ -1105,7 +1126,7 @@ export default class EventTile extends React.Component<IProps, IState> {
                     "aria-atomic": true,
                     "data-scroll-tokens": scrollToken,
                 }, [
-                    <div className="mx_EventTile_line" key="mx_EventTile_line">
+                    <div className="mx_EventTile_line" style={this.eventTileLineStyle} key="mx_EventTile_line">
                         <EventTileType ref={this.tile}
                             mxEvent={this.props.mxEvent}
                             highlights={this.props.highlights}
@@ -1192,7 +1213,7 @@ export default class EventTile extends React.Component<IProps, IState> {
                         ircTimestamp,
                         sender,
                         ircPadlock,
-                        <div className="mx_EventTile_line" key="mx_EventTile_line">
+                        <div className="mx_EventTile_line" style={this.eventTileLineStyle} key="mx_EventTile_line">
                             { groupTimestamp }
                             { groupPadlock }
                             { thread }
@@ -1323,6 +1344,7 @@ class E2ePadlock extends React.Component<IE2ePadlockProps, IE2ePadlockState> {
 
 interface ISentReceiptProps {
     messageState: string; // TODO: Types for message sending state
+    msgOptionStyle;
 }
 
 interface ISentReceiptState {
@@ -1377,7 +1399,7 @@ class SentReceipt extends React.PureComponent<ISentReceiptProps, ISentReceiptSta
         }
 
         return (
-            <div className="mx_EventTile_msgOption">
+            <div className="mx_EventTile_msgOption" style={this.props.msgOptionStyle}>
                 <span className="mx_EventTile_readAvatars">
                     <span className={receiptClasses} onMouseEnter={this.onHoverStart} onMouseLeave={this.onHoverEnd}>
                         {nonCssBadge}
